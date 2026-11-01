@@ -1,1 +1,4 @@
 .github-token
+*.token
+.DS_Store
+*.part
