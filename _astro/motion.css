@@ -1,0 +1,99 @@
+/* =========================================================
+   Motion — Rumbo Mercante
+   Scroll-reveal escalonado + hover de tarjetas y botones.
+   Solo transform / opacity / box-shadow. Sin transition: all.
+   ========================================================= */
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --dur-hover: 250ms;
+  --dur-press: 140ms;
+  --dur-reveal: 480ms;
+  --stagger: 60ms;
+  --shadow-rest: 0 1px 2px #061a2d0f, 0 2px 6px #061a2d0d;
+  --shadow-hover: 0 14px 32px -14px #061a2d40, 0 4px 10px -4px #061a2d14;
+}
+
+/* ---------- 1. Scroll-reveal con stagger ----------
+   motion.js asigna --i (posición dentro de su grupo, máx. 6).
+   Se usa animation con fill "backwards": al terminar, el elemento
+   vuelve a sus estilos normales y el hover funciona sin retraso. */
+@keyframes rm-reveal {
+  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal { opacity: 0; transform: none; transition: none; }
+  .reveal.is-visible {
+    opacity: 1;
+    animation: rm-reveal var(--dur-reveal) var(--ease-out) calc(var(--i, 0) * var(--stagger)) backwards;
+  }
+}
+
+/* ---------- 2. Hover de tarjetas ---------- */
+body .cats .cat[data-astro-cid-lcdefpme],
+body .featured .feat[data-astro-cid-lcdefpme],
+body .card[data-astro-cid-7ahxywo7],
+body .slot[data-astro-cid-5cg62lrn] {
+  box-shadow: var(--shadow-rest);
+  transition:
+    transform var(--dur-hover) var(--ease-out),
+    box-shadow var(--dur-hover) var(--ease-out),
+    border-color var(--dur-hover) ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body .cats .cat[data-astro-cid-lcdefpme]:hover,
+  body .featured .feat[data-astro-cid-lcdefpme]:hover,
+  body .card[data-astro-cid-7ahxywo7]:hover,
+  body .slot[data-astro-cid-5cg62lrn]:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-hover);
+  }
+  /* Filas a todo el ancho: 1.02 sobre ~1100px movería 11px por lado
+     y taparía a la fila vecina; 1.01 se percibe igual de sutil. */
+  body .latest .card[data-astro-cid-7ahxywo7]:hover {
+    transform: scale(1.01);
+    box-shadow: var(--shadow-hover);
+  }
+}
+
+/* ---------- 3. Botones ---------- */
+body .btn {
+  transition:
+    transform var(--dur-hover) var(--ease-out),
+    box-shadow var(--dur-hover) var(--ease-out),
+    background-color 200ms ease,
+    color 200ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  body .btn:hover { transform: scale(1.02); box-shadow: var(--shadow-hover); }
+}
+/* Feedback al presionar (también en táctil) */
+body .btn:active {
+  transform: scale(0.97);
+  box-shadow: var(--shadow-rest);
+  transition-duration: var(--dur-press);
+}
+
+/* ---------- 4. Movimiento reducido ----------
+   Sin escalas ni desplazamientos; se conserva el cambio de sombra
+   y color para que el hover siga indicando "esto es clicable". */
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal.is-visible { opacity: 1; transform: none; animation: none; }
+  body .cats .cat[data-astro-cid-lcdefpme],
+  body .featured .feat[data-astro-cid-lcdefpme],
+  body .card[data-astro-cid-7ahxywo7],
+  body .slot[data-astro-cid-5cg62lrn],
+  body .btn {
+    transition: box-shadow 200ms ease, border-color 200ms ease, background-color 200ms ease, color 200ms ease;
+  }
+  body .cats .cat[data-astro-cid-lcdefpme]:hover,
+  body .featured .feat[data-astro-cid-lcdefpme]:hover,
+  body .card[data-astro-cid-7ahxywo7]:hover,
+  body .latest .card[data-astro-cid-7ahxywo7]:hover,
+  body .slot[data-astro-cid-5cg62lrn]:hover,
+  body .btn:hover,
+  body .btn:active { transform: none; }
+  .card-media img, .hero-img img { transition: none !important; animation: none !important; transform: none !important; }
+}
