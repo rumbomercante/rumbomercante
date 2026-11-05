@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-labelledby="title-c3 desc-c3">
+  <title id="title-c3">Rumbo Mercante - Concepto 3: Monograma Naval RM</title>
+  <desc id="desc-c3">Monograma arquitectónico 'RM' construido con trazos navales de compás y vector de rumbo a 45 grados.</desc>
+  <defs>
+    <linearGradient id="brass-c3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f6d6a2"/>
+      <stop offset="50%" stop-color="#f0c27a"/>
+      <stop offset="100%" stop-color="#c59341"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Anillo de Horizonte Náutico -->
+  <circle cx="256" cy="256" r="214" fill="none" stroke="#061a2d" stroke-width="8" opacity="0.15"/>
+  <circle cx="256" cy="256" r="198" fill="none" stroke="url(#brass-c3)" stroke-width="4"/>
+
+  <!-- Indicador Norte discreto en el anillo -->
+  <polygon points="256,44 264,62 248,62" fill="url(#brass-c3)"/>
+
+  <!-- MONOGRAMA RM -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- LETRA R (Azul Marino Profundo) -->
+    <!-- Mástil vertical de la R -->
+    <path d="M 148 376 L 148 136" stroke="#061a2d" stroke-width="40"/>
+    
+    <!-- Bucle superior de la R -->
+    <path d="M 148 136 H 220 C 264 136, 264 246, 220 246 H 148" stroke="#061a2d" stroke-width="40"/>
+    
+    <!-- Pierna / Vector de Rumbo de la R (Bronce Naval) -->
+    <!-- Se proyecta hacia adelante a 45° con punta de flecha sutil -->
+    <path d="M 196 246 L 284 376" stroke="url(#brass-c3)" stroke-width="40"/>
+
+    <!-- LETRA M (Estructura Marina Continua) -->
+    <!-- Trazo en zigzag naval de la M -->
+    <path d="M 284 376 L 332 196 L 380 296 L 428 196 L 428 376" stroke="#061a2d" stroke-width="36"/>
+  </g>
+
+  <!-- Remache / Eje de navegación dorado en la unión -->
+  <circle cx="196" cy="246" r="12" fill="url(#brass-c3)"/>
+  <circle cx="196" cy="246" r="6" fill="#061a2d"/>
+</svg>
+

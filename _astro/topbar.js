@@ -2,12 +2,12 @@
 (function () {
   // ▼ Enlaces de tus redes. Deja "" en una red para ocultar su ícono.
   var REDES = {
-    facebook:  "#",
-    youtube:   "#",
-    instagram: "#",
-    linkedin:  "#",
-    tiktok:    "#",
-    whatsapp:  "#"   // ej: "https://wa.me/584121234567"
+    facebook:  "",
+    youtube:   "",
+    instagram: "https://www.instagram.com/rumbomercante/",
+    linkedin:  "",
+    tiktok:    "",
+    whatsapp:  ""   // ej: "https://wa.me/584121234567"
   };
 
   document.querySelectorAll(".topbar-social a[data-red]").forEach(function (a) {
