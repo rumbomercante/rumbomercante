@@ -63,5 +63,10 @@
     if (input) input.value = "";
     apply();
   });
+  // Búsqueda que llega desde otra página: /blog/?q=palabra
+  try {
+    var q0 = new URLSearchParams(location.search).get("q");
+    if (q0 && input) { input.value = q0; state.q = q0; }
+  } catch (e) {}
   apply();
 })();
