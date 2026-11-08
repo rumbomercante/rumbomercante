@@ -2,5 +2,13 @@
   "redirects": [
     { "source": "/publicaciones", "destination": "/blog/", "permanent": true },
     { "source": "/publicaciones/", "destination": "/blog/", "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/_astro/fonts/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
   ]
 }
