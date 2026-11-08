@@ -1,0 +1,35 @@
+/* Rosa de los vientos en el hero de la portada (a la derecha del titular) */
+.hero .hero-rose {
+  position: absolute; z-index: 1; pointer-events: none;
+  right: clamp(1rem, 6vw, 7rem); top: 50%; translate: 0 -50%;
+  width: min(34vw, 460px); aspect-ratio: 1;
+}
+.hero .hero-inner { z-index: 2; }
+.hr-rose { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 10px 30px rgba(3, 16, 29, .55)); }
+.hr-rose .rr-ring { fill: rgba(6, 26, 45, .35); stroke: rgba(247, 243, 234, .45); stroke-width: 1; }
+.hr-rose .rr-ring-2 { fill: none; stroke: rgba(247, 243, 234, .22); }
+.hr-rose .rr-ticks line { stroke: rgba(247, 243, 234, .7); stroke-width: 1; }
+.hr-rose .rr-nums text { fill: rgba(247, 243, 234, .75); font: 500 11px var(--font-mono); text-anchor: middle; letter-spacing: .05em; }
+.hr-rose .rr-cardinal text { fill: #f7f3ea; font: 600 22px var(--font-display); text-anchor: middle; }
+.hr-rose .rr-cardinal text:first-child { fill: #e24a3b; }
+.hr-rose .rr-star path { fill: rgba(247, 243, 234, .14); stroke: rgba(247, 243, 234, .6); stroke-width: 1; }
+.hr-rose .rr-star .rr-star-2 { fill: rgba(247, 243, 234, .07); }
+.hr-rose .rr-star .rr-star-hi { fill: #f0c27a; stroke: none; }
+.hr-rose .rr-lubber path { fill: #e24a3b; }
+.hr-rose .rr-hub { fill: #061a2d; stroke: #f0c27a; stroke-width: 2; }
+.hr-read {
+  position: absolute; left: 50%; bottom: 22%; translate: -50% 0; margin: 0;
+  display: grid; justify-items: center; gap: .2rem;
+  font: 500 .64rem/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: rgba(247, 243, 234, .75);
+}
+.hr-read [data-heading] { font: 600 1.45rem/1 var(--font-mono); letter-spacing: .02em; color: #f0c27a; }
+
+/* Pantallas medianas: más pequeña y detrás del texto, muy tenue */
+@media (max-width: 1100px) {
+  .hero .hero-rose { width: min(40vw, 340px); right: 1rem; opacity: .55; }
+}
+/* Teléfono: la rosa pasa a la esquina superior derecha, discreta */
+@media (max-width: 700px) {
+  .hero .hero-rose { width: 170px; top: 1.25rem; right: -1.5rem; translate: none; opacity: .4; }
+  .hr-read { display: none; }
+}
