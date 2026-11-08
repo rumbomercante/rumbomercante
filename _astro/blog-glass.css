@@ -1,0 +1,121 @@
+/* =========================================================
+   Blog con vidrio: publicaciones y barra lateral como láminas
+   sobre un fondo de luces suaves. Mismo vidrio que la portada.
+   ========================================================= */
+
+/* ---------- La curva del encabezado se funde con el fondo de luces ---------- */
+.page-hero[data-astro-cid-75ysl5lo] {
+  z-index: 2;
+  padding-bottom: calc(clamp(3.5rem, 8vw, 5.5rem) + 50px);
+  --wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath d='M1440 40 C1200 80 960 80 720 40 C480 0 240 80 0 40 V0 H1440 Z'/%3E%3C/svg%3E");
+  -webkit-mask: linear-gradient(#000 0 0) top / 100% calc(100% - 69px) no-repeat, var(--wave) bottom / 100% 70px no-repeat;
+          mask: linear-gradient(#000 0 0) top / 100% calc(100% - 69px) no-repeat, var(--wave) bottom / 100% 70px no-repeat;
+}
+
+/* ---------- Fondo de luces detrás de las láminas ----------
+   Degradados que se repiten a lo largo de la página, sin desenfoque ni
+   animación: el vidrio se recalcula al hacer scroll y así se mantiene fluido. */
+.list[data-astro-cid-uoyt3dpg] {
+  position: relative; isolation: isolate;
+  margin-top: -70px; padding-top: calc(clamp(2.5rem, 5vw, 3.5rem) + 70px);
+  background:
+    radial-gradient(520px 460px at 8% 345px, rgba(30, 79, 122, .42), transparent 70%) 0 0 / 100% 1500px repeat-y,
+    radial-gradient(480px 460px at 94% 520px, rgba(240, 194, 122, .62), transparent 70%) 0 0 / 100% 1500px repeat-y,
+    radial-gradient(420px 380px at 22% 980px, rgba(240, 194, 122, .5), transparent 70%) 0 0 / 100% 1500px repeat-y,
+    radial-gradient(560px 480px at 82% 1150px, rgba(30, 79, 122, .4), transparent 70%) 0 0 / 100% 1500px repeat-y,
+    #f3eee3;
+}
+
+/* ---------- Publicaciones: lámina de vidrio claro ---------- */
+.post-list { gap: 1.5rem; }
+.post-std, .post-std:last-child {
+  position: relative; isolation: isolate;
+  padding: .85rem .85rem 1.6rem; border-radius: 22px;
+  background: linear-gradient(150deg, rgba(255, 255, 255, .74), rgba(255, 255, 255, .52));
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+          backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, .75);
+  box-shadow: 0 18px 40px -20px rgba(6, 26, 45, .35), inset 0 1px 0 rgba(255, 255, 255, .9);
+  transition: box-shadow .45s cubic-bezier(.16, 1, .3, 1), translate .45s cubic-bezier(.16, 1, .3, 1), background .45s ease;
+}
+.post-std .post-media { max-width: none; border-radius: 15px; margin-bottom: 1.3rem; }
+.post-std .post-text { padding-inline: .75rem; }
+.post-std .post-info { color: #47566a; }
+.post-std .post-excerpt { margin-bottom: 1.25rem; }
+.post-std .btn-read { border-radius: 999px; }
+
+/* ---------- Barra lateral: láminas pequeñas ---------- */
+.blog-side .widget {
+  padding: 1rem 1.05rem 1.1rem; border-radius: 18px;
+  background: linear-gradient(150deg, rgba(255, 255, 255, .74), rgba(255, 255, 255, .52));
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+          backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, .75);
+  box-shadow: 0 14px 30px -18px rgba(6, 26, 45, .32), inset 0 1px 0 rgba(255, 255, 255, .9);
+}
+.blog-side .widget-search { padding: .6rem; }
+.blog-search { border-radius: 12px; border-color: rgba(30, 79, 122, .22); background: rgba(255, 255, 255, .8); }
+.tag-chip { border-radius: 999px; background: rgba(255, 255, 255, .72); }
+.sec-btn .count { background: rgba(30, 79, 122, .12); }
+.widget-secs li + li { border-top-color: rgba(6, 26, 45, .1); }
+.widget-title { border-bottom-color: rgba(6, 26, 45, .12); }
+.r-date { color: #47566a; }
+
+/* El anuncio: vidrio azul noche, como "Lo más útil para empezar" */
+.blog-side .ad-free {
+  border-radius: 18px;
+  background:
+    linear-gradient(150deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, .02)),
+    linear-gradient(160deg, rgba(18, 61, 107, .88), rgba(6, 26, 45, .93));
+  -webkit-backdrop-filter: blur(16px) saturate(170%);
+          backdrop-filter: blur(16px) saturate(170%);
+  border: 1px solid rgba(255, 255, 255, .25);
+  box-shadow: 0 20px 40px -20px rgba(6, 26, 45, .6), inset 0 1px 0 rgba(255, 255, 255, .22);
+}
+.blog-side .ad-free::after { border-radius: 12px; }
+.blog-side .ad-free-btn { border-radius: 999px; }
+
+/* Aviso de "sin resultados" */
+.post-empty { background: rgba(255, 255, 255, .6); border-radius: 18px; }
+
+/* ---------- Borde de luz en las láminas ---------- */
+.post-std::before, .blog-side .widget::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none;
+  background: linear-gradient(135deg, rgba(255, 255, 255, .95), rgba(255, 255, 255, .1) 35%, rgba(255, 255, 255, 0) 60%, rgba(240, 194, 122, .5));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+.blog-side .widget { position: relative; }
+
+/* ---------- Movimiento ---------- */
+@media (hover: hover) and (pointer: fine) {
+  .post-std:hover {
+    translate: 0 -4px;
+    background: linear-gradient(150deg, rgba(255, 255, 255, .84), rgba(255, 255, 255, .62));
+    box-shadow: 0 28px 54px -22px rgba(6, 26, 45, .45), inset 0 1px 0 #fff;
+  }
+}
+
+/* ---------- Teléfono y tableta ---------- */
+@media (max-width: 1024px) {
+  .blog-side .widget { min-width: 0; }
+}
+@media (max-width: 600px) {
+  .post-std, .post-std:last-child { padding: .6rem .6rem 1.25rem; border-radius: 18px; }
+  .post-std .post-media { border-radius: 12px; }
+  .post-std .post-text { padding-inline: .45rem; }
+}
+
+/* ---------- Accesibilidad ---------- */
+@media (prefers-reduced-transparency: reduce) {
+  .post-std, .post-std:last-child, .blog-side .widget { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .blog-side .ad-free { background: #0b2640; -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .post-std { transition: none; }
+  .post-std:hover { translate: none; }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .post-std, .post-std:last-child, .blog-side .widget { background: rgba(255, 255, 255, .92); }
+  .blog-side .ad-free { background: #0b2640; }
+}

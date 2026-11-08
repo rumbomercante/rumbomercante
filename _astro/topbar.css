@@ -46,3 +46,60 @@ iframe.goog-te-banner-frame,.goog-te-banner-frame,#goog-gt-tt,.goog-te-balloon-f
 .lang-btn[aria-pressed="true"]{background:#f0c27a;color:#061a2d}
 .lang-btn img{box-shadow:0 0 0 1px #ffffff26}
 .lang-busy .lang-btn[aria-pressed="true"]::after{border-color:#061a2d;border-right-color:transparent}
+
+/* Idioma junto a "Contacto", dentro del menú principal (ya no hay barra superior) */
+.header-inner > .nav { margin-left: auto; }
+.header-inner > .lang-switch { flex: none; margin-left: -.5rem; }
+.header-inner > .lang-btn { flex: none; }
+@media (max-width: 920px) {
+  .header-inner > .lang-switch { margin-left: auto; margin-right: .1rem; }
+  .header-inner { gap: .5rem !important; }
+  .header-inner > .lang-switch .lang-btn span { display: none; }
+  .header-inner > .lang-switch .lang-btn { padding: .3rem .4rem; min-height: 32px; }
+}
+@media (max-width: 380px) {
+  .header-inner { gap: .25rem !important; }
+  .site-header .logo svg { width: 30px; height: 30px; }
+  .site-header .logo-name { font-size: 1.02rem; }
+  .header-inner > .lang-switch { gap: .1rem; }
+  .header-inner > .lang-switch .lang-btn { padding: .3rem .3rem; }
+}
+
+/* Idioma: solo banderas; la elegida va en una pastilla de vidrio */
+.lang-btn span { display: none; }
+.header-inner > .lang-switch { gap: .3rem; }
+.header-inner > .lang-switch .lang-btn {
+  width: 42px; height: 34px; padding: 0; justify-content: center;
+  border: 1px solid transparent; border-radius: 12px; background: none;
+  opacity: .6; transition: opacity .25s ease, background-color .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+.header-inner > .lang-switch .lang-btn:hover { opacity: 1; border-color: rgba(255, 255, 255, .2); background: rgba(255, 255, 255, .06); }
+.header-inner > .lang-switch .lang-btn[aria-pressed="true"] {
+  opacity: 1; color: transparent;
+  background: linear-gradient(150deg, rgba(255, 255, 255, .24), rgba(255, 255, 255, .08));
+  -webkit-backdrop-filter: blur(12px) saturate(170%); backdrop-filter: blur(12px) saturate(170%);
+  border-color: rgba(255, 255, 255, .38);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .45), inset 0 -1px 0 rgba(0, 0, 0, .18), 0 6px 16px -6px rgba(0, 0, 0, .6);
+}
+.lang-busy .lang-btn[aria-pressed="true"]::after { border-color: #f0c27a; border-right-color: transparent; }
+@media (max-width: 380px) { .header-inner > .lang-switch .lang-btn { width: 36px; height: 32px; } }
+@media (prefers-reduced-transparency: reduce) {
+  .header-inner > .lang-switch .lang-btn[aria-pressed="true"] { background: #14385b; -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+
+/* Teléfonos: que el botón del menú nunca se encoja */
+.header-inner > .menu-toggle { flex: none; }
+.header-inner > .brand { min-width: 0; }
+@media (max-width: 430px) {
+  .header-inner { gap: .25rem !important; }
+  .site-header .logo svg { width: 32px; height: 32px; }
+  .site-header .logo-name { font-size: 1.05rem; }
+  .header-inner > .lang-switch { gap: .15rem; }
+  .header-inner > .lang-switch .lang-btn { width: 34px; height: 30px; }
+  .header-inner > .lang-switch .lang-btn img { width: 20px; height: 14px; }
+}
+@media (max-width: 360px) {
+  .site-header .logo svg { width: 26px; height: 26px; }
+  .site-header .logo-name { font-size: .92rem; }
+  .header-inner > .lang-switch .lang-btn { width: 30px; height: 28px; }
+}
