@@ -103,3 +103,31 @@ iframe.goog-te-banner-frame,.goog-te-banner-frame,#goog-gt-tt,.goog-te-balloon-f
   .site-header .logo-name { font-size: .92rem; }
   .header-inner > .lang-switch .lang-btn { width: 30px; height: 28px; }
 }
+
+/* ---------- Barra de navegación translúcida ----------
+   El vidrio va en un pseudo-elemento: un backdrop-filter en la propia barra
+   encerraría al menú de celular, que es position: fixed. */
+.site-header[data-astro-cid-nen7h5rs] { background: transparent; isolation: isolate; }
+.site-header[data-astro-cid-nen7h5rs]::before {
+  content: ""; position: absolute; inset: 0 0 -1px; z-index: -1; pointer-events: none;
+  background-color: #061a2d;
+  -webkit-backdrop-filter: blur(18px) saturate(170%);
+          backdrop-filter: blur(18px) saturate(170%);
+  transition: background-color .2s;
+}
+/* Arriba del todo no hay nada detrás: azul noche; al bajar, vidrio */
+.site-header[data-astro-cid-nen7h5rs].is-scrolled::before { background-color: rgba(6, 26, 45, .72); }
+.site-header[data-astro-cid-nen7h5rs].is-open::before { background-color: #061a2d; }
+.nav[data-astro-cid-nen7h5rs] a[data-astro-cid-nen7h5rs]:not(.btn):not([aria-current=page]) { color: rgba(255, 255, 255, .88); }
+
+
+@media (prefers-reduced-transparency: reduce) {
+  .site-header[data-astro-cid-nen7h5rs]::before, .site-header[data-astro-cid-nen7h5rs].is-scrolled::before { background-color: #061a2d; -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .site-header[data-astro-cid-nen7h5rs].is-scrolled::before { background-color: rgba(6, 26, 45, .95); }
+}
+
+/* Con el menú de celular abierto la barra debe seguir visible para poder cerrarlo:
+   basta con bloquear el scroll en <html>; si <body> también recorta, la barra se pierde. */
+body:has(.site-header.is-open) { overflow: visible !important; }

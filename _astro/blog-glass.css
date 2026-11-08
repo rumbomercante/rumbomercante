@@ -119,3 +119,22 @@
   .post-std, .post-std:last-child, .blog-side .widget { background: rgba(255, 255, 255, .92); }
   .blog-side .ad-free { background: #0b2640; }
 }
+
+/* Artículos más compactos y conjunto (lista + barra lateral) centrado */
+@media (min-width: 1025px) {
+  .blog-std { grid-template-columns: minmax(0, 640px) 300px; justify-content: center; gap: 2.5rem; }
+}
+@media (max-width: 1024px) {
+  .blog-std { max-width: 660px; margin-inline: auto; }
+}
+.post-list { gap: 1.75rem; }
+.post-std, .post-std:last-child { padding-bottom: 1.25rem; }
+.post-std .post-media { margin-bottom: 1rem; }
+.post-std .post-title { font-size: clamp(1.25rem, 1.9vw, 1.5rem); margin-bottom: .55rem; }
+.post-std .post-info { font-size: .78rem; margin-bottom: .7rem; }
+.post-std .post-excerpt { font-size: .93rem; line-height: 1.6; margin-bottom: .95rem; }
+.post-std .btn-read { font-size: .7rem; padding: .7rem 1rem; }
+@media (min-width: 681px) {
+  .post-std .post-info { flex-wrap: nowrap; font-size: .75rem; white-space: nowrap; }
+  .post-std .post-info > span { padding-right: .6rem; margin-right: .55rem; }
+}
