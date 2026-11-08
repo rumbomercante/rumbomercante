@@ -392,3 +392,12 @@
 .ad-slide .ad-card-go { font-size: .92rem; margin-top: .4rem; }
 .ad-slide .ad-card-ph svg { width: 28px; height: 28px; }
 @media (max-width: 640px) { .ad-slide { width: 260px; } }
+
+/* Anunciantes: mismo grado de translucidez que las tarjetas azules de Nosotros */
+.ad-slide .ad-card-body,
+.ad-slide .ad-card--empty .ad-card-body {
+  background:
+    linear-gradient(150deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .01)),
+    linear-gradient(160deg, rgba(10, 40, 72, .6), rgba(6, 26, 45, .72)) !important;
+}
+.ad-slide .ad-card-k, .ad-slide .ad-card-q { color: #fff; }

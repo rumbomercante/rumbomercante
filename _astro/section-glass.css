@@ -1,0 +1,124 @@
+/* =========================================================
+   Secciones y subsecciones con el estilo de /blog/ y de los
+   artículos: curva, luces de fondo, vidrio y contenido centrado.
+   ========================================================= */
+@media screen {
+  /* ---------- Fondo de luces (mismo mosaico que el blog) ---------- */
+  #contenido {
+    background:
+      radial-gradient(520px 460px at 8% 345px, rgba(30, 79, 122, .42), transparent 70%) 0 0 / 100% 1500px repeat-y,
+      radial-gradient(480px 460px at 94% 520px, rgba(240, 194, 122, .62), transparent 70%) 0 0 / 100% 1500px repeat-y,
+      radial-gradient(420px 380px at 22% 980px, rgba(240, 194, 122, .5), transparent 70%) 0 0 / 100% 1500px repeat-y,
+      radial-gradient(560px 480px at 82% 1150px, rgba(30, 79, 122, .4), transparent 70%) 0 0 / 100% 1500px repeat-y,
+      #f3eee3;
+  }
+
+  /* ---------- La curva del encabezado ---------- */
+  #contenido .page-hero {
+    padding-bottom: calc(clamp(3.5rem, 8vw, 5.5rem) + 50px);
+    --wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath d='M1440 40 C1200 80 960 80 720 40 C480 0 240 80 0 40 V0 H1440 Z'/%3E%3C/svg%3E");
+    -webkit-mask: linear-gradient(#000 0 0) top / 100% calc(100% - 69px) no-repeat, var(--wave) bottom / 100% 70px no-repeat;
+            mask: linear-gradient(#000 0 0) top / 100% calc(100% - 69px) no-repeat, var(--wave) bottom / 100% 70px no-repeat;
+  }
+
+  /* ---------- Contenido centrado ---------- */
+  #contenido > .section-tight > .container,
+  #contenido .subnav .container { width: min(100% - 2.5rem, 980px); }
+  #contenido > .section-tight { padding-block: 1.25rem; }
+  #contenido > .section-tight:last-child { padding-bottom: clamp(3.5rem, 7vw, 5.5rem); }
+  #contenido .more { margin-top: 0; }
+
+  /* ---------- Submenú: pastilla de vidrio que acompaña al bajar ---------- */
+  #contenido .subnav { background: none; border: 0; top: calc(var(--header-h) + .5rem); padding-top: .5rem; }
+  #contenido .subnav ul {
+    width: fit-content; max-width: 100%; padding: .3rem; gap: .15rem; border-radius: 999px;
+    background: linear-gradient(150deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .58));
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+            backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, .75);
+    box-shadow: 0 14px 30px -18px rgba(6, 26, 45, .4), inset 0 1px 0 rgba(255, 255, 255, .9);
+  }
+  #contenido .subnav a { padding: .5rem .95rem; border: 0; border-radius: 999px; font-size: .88rem; color: #24384f; transition: background-color .2s, color .2s; }
+  #contenido .subnav a:hover { background: rgba(6, 26, 45, .08); color: #061a2d; }
+  #contenido .subnav a[aria-current=page] { background: #061a2d; color: #f7f3ea; }
+
+  /* ---------- Láminas de vidrio claro ---------- */
+  #contenido .sub, #contenido .card, #contenido .other, #contenido .empty {
+    background: linear-gradient(150deg, rgba(255, 255, 255, .74), rgba(255, 255, 255, .52));
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+            backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, .75);
+    box-shadow: 0 18px 40px -20px rgba(6, 26, 45, .35), inset 0 1px 0 rgba(255, 255, 255, .9);
+  }
+  #contenido .sub { position: relative; padding: 1.2rem; border-radius: 18px; }
+  #contenido .grid-subs { grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 1rem; }
+  #contenido .sub h2 { font-size: 1.15rem; }
+  #contenido .sub > p { font-size: .86rem; color: #47566a; }
+  #contenido .sub li a { font-size: .85rem; }
+  #contenido .count { background: rgba(30, 79, 122, .12); color: #1e4f7a; }
+  #contenido .other { border-radius: 16px; padding: .9rem 1.05rem; font-size: .95rem; }
+  #contenido .other-icon { background: rgba(255, 255, 255, .7); }
+  #contenido .empty { border-radius: 22px; padding: 3rem 1.5rem; }
+  #contenido .empty p { color: #47566a; }
+
+  /* ---------- Tarjetas: etiqueta sobre la imagen, sin icono ni fila inferior ---------- */
+  #contenido .card { border-radius: 20px; }
+  #contenido .card-icon, #contenido .card-meta { display: none; }
+  #contenido .card-top {
+    position: absolute; top: 1rem; left: 1rem; z-index: 2;
+    flex-wrap: wrap; gap: .4rem; margin: 0; pointer-events: none;
+  }
+  #contenido .card-top .tag {
+    background: #061a2d; color: #f0c27a; border: 0;
+    font: 600 .72rem/1 var(--font-mono); letter-spacing: .1em; text-transform: uppercase;
+    padding: .45rem .65rem; border-radius: 4px;
+    box-shadow: 0 0 0 1px #f0c27a40;
+  }
+  #contenido .card-link { padding: 1.25rem 1.6rem 1.35rem; }
+  #contenido .card-link p { margin-bottom: 0; }
+
+  /* ---------- Herramientas: vidrio azul translúcido ---------- */
+  #contenido .tool {
+    padding: 1.3rem 1.4rem; gap: 1.1rem; border-radius: 18px; color: #fff;
+    background:
+      linear-gradient(150deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .01)),
+      linear-gradient(160deg, rgba(10, 40, 72, .6), rgba(6, 26, 45, .72));
+    -webkit-backdrop-filter: blur(16px) saturate(170%);
+            backdrop-filter: blur(16px) saturate(170%);
+    border: 1px solid rgba(255, 255, 255, .34);
+    box-shadow: 0 20px 40px -20px rgba(6, 26, 45, .6), inset 0 1px 0 rgba(255, 255, 255, .22);
+  }
+  #contenido .tool strong { font-size: 1.12rem; }
+  #contenido .tool-body > span:not(.tag):not(.link-arrow) { font-size: .88rem; line-height: 1.55; }
+  #contenido .tool-icon { width: 46px; height: 46px; border-radius: 12px; }
+
+  /* ---------- Borde de luz ---------- */
+  #contenido .sub::before, #contenido .other::before {
+    content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none;
+    background: linear-gradient(135deg, rgba(255, 255, 255, .95), rgba(255, 255, 255, .1) 35%, rgba(255, 255, 255, 0) 60%, rgba(240, 194, 122, .5));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+            mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  }
+  #contenido .other { position: relative; }
+}
+
+@media screen and (min-width: 861px) {
+  #contenido .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+}
+@media screen and (max-width: 860px) {
+  #contenido > .section-tight > .container,
+  #contenido .subnav .container { width: min(100% - 2.5rem, 660px); }
+}
+@media screen and (prefers-reduced-transparency: reduce) {
+  #contenido .sub, #contenido .card, #contenido .other, #contenido .empty, #contenido .subnav ul { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  #contenido .tool { background: #0b2640; -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  @media screen {
+    #contenido .sub, #contenido .card, #contenido .other, #contenido .empty, #contenido .subnav ul { background: rgba(255, 255, 255, .92); }
+    #contenido .tool { background: #0b2640; }
+  }
+}
+
+/* Herramientas: el contenido de ambas tarjetas arranca a la misma altura */
+@media screen { #contenido .tool-body { align-content: start; } }

@@ -1,0 +1,125 @@
+/* =========================================================
+   Contacto, Anúnciate, herramientas y páginas legales con el
+   mismo vidrio del blog, los artículos y las secciones.
+   Solo en pantalla: la impresión no cambia.
+   ========================================================= */
+@media screen {
+  #contenido {
+    background:
+      radial-gradient(520px 460px at 8% 345px, rgba(30, 79, 122, .42), transparent 70%) 0 0 / 100% 1500px repeat-y,
+      radial-gradient(480px 460px at 94% 520px, rgba(240, 194, 122, .62), transparent 70%) 0 0 / 100% 1500px repeat-y,
+      radial-gradient(420px 380px at 22% 980px, rgba(240, 194, 122, .5), transparent 70%) 0 0 / 100% 1500px repeat-y,
+      radial-gradient(560px 480px at 82% 1150px, rgba(30, 79, 122, .4), transparent 70%) 0 0 / 100% 1500px repeat-y,
+      #f3eee3;
+  }
+  #contenido .page-hero {
+    padding-bottom: calc(clamp(3.5rem, 8vw, 5.5rem) + 50px);
+    --wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath d='M1440 40 C1200 80 960 80 720 40 C480 0 240 80 0 40 V0 H1440 Z'/%3E%3C/svg%3E");
+    -webkit-mask: linear-gradient(#000 0 0) top / 100% calc(100% - 69px) no-repeat, var(--wave) bottom / 100% 70px no-repeat;
+            mask: linear-gradient(#000 0 0) top / 100% calc(100% - 69px) no-repeat, var(--wave) bottom / 100% 70px no-repeat;
+  }
+
+  /* ---------- Centrado (la calculadora conserva su ancho: necesita sitio para la cuadrícula) ---------- */
+  #contenido > section:not(.page-hero) > .container:not(:has(#board)) { width: min(100% - 2.5rem, 980px); }
+  #contenido > section:not(.page-hero) { padding-block: 1.25rem; }
+  #contenido > section:last-child { padding-bottom: clamp(3.5rem, 7vw, 5.5rem); }
+  #contenido .contact-grid, #contenido .conv { padding-bottom: 0; gap: 1.25rem; }
+  #contenido .contact-grid { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); }
+
+  /* ---------- Vidrio claro ---------- */
+  #contenido .form, #contenido .box, #contenido .steps li, #contenido .rule, #contenido .cta-row, #contenido .board-wrap, #contenido .panel, #contenido .legal {
+    background: linear-gradient(150deg, rgba(255, 255, 255, .74), rgba(255, 255, 255, .52));
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+            backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, .75);
+    box-shadow: 0 18px 40px -20px rgba(6, 26, 45, .35), inset 0 1px 0 rgba(255, 255, 255, .9);
+    border-radius: 18px;
+  }
+  /* Donde se lee o se trabaja, más cuerpo */
+  #contenido .form, #contenido .board-wrap, #contenido .panel, #contenido .legal { background: linear-gradient(150deg, rgba(255, 255, 255, .84), rgba(255, 255, 255, .66)); border-radius: 22px; }
+  #contenido .box { padding: 1.2rem 1.25rem 1.3rem; }
+  #contenido .box p, #contenido .steps span, #contenido .rule span { color: #47566a; }
+  #contenido .box p, #contenido .steps span { font-size: .88rem; line-height: 1.55; }
+  #contenido .grid-3 { gap: 1rem; }
+  #contenido .steps { gap: 1rem; }
+  #contenido .steps li { padding: 1.2rem 1.25rem; }
+  #contenido .steps-band { background: none; border-block: 0; }
+  #contenido .fine { color: #47566a; }
+  #contenido .cta-row { padding: 1rem 1.5rem; gap: 1rem; }
+  #contenido .cta-row h2 { font-size: clamp(1.1rem, 1.9vw, 1.35rem); }
+  #contenido .cta-row .btn { font-size: .85rem; padding: .6rem 1.05rem; }
+
+  /* ---------- Formularios ---------- */
+  #contenido .form { padding: clamp(1.15rem, 3vw, 2rem); gap: 1.05rem; }
+  #contenido .input, #contenido .select, #contenido .textarea { background-color: rgba(255, 255, 255, .72); }
+  #contenido .input:not(:focus), #contenido .select:not(:focus), #contenido .textarea:not(:focus) { border-color: rgba(6, 26, 45, .16); }
+  #contenido .note:not(.note-warn) { background: rgba(233, 240, 246, .72); border-color: rgba(255, 255, 255, .7); border-radius: 14px; }
+  #contenido .note-warn { border-radius: 14px; }
+
+  /* ---------- Azules translúcidas ---------- */
+  #contenido .side-card, #contenido .refcard {
+    color: #fff;
+    background:
+      linear-gradient(150deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .01)),
+      linear-gradient(160deg, rgba(10, 40, 72, .6), rgba(6, 26, 45, .72));
+    -webkit-backdrop-filter: blur(16px) saturate(170%);
+            backdrop-filter: blur(16px) saturate(170%);
+    border: 1px solid rgba(255, 255, 255, .34);
+    box-shadow: 0 20px 40px -20px rgba(6, 26, 45, .6), inset 0 1px 0 rgba(255, 255, 255, .22);
+    border-radius: 18px;
+  }
+  #contenido .side-card { padding: 1.3rem 1.35rem; }
+  #contenido .side-card li { font-size: .88rem; }
+  #contenido .refcard span { color: #fff; font-size: .86rem; }
+  /* Resultados de la calculadora: cifras que importan, un poco más de cuerpo */
+  #contenido .results {
+    background:
+      linear-gradient(150deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .01)),
+      linear-gradient(160deg, rgba(10, 40, 72, .76), rgba(6, 26, 45, .86));
+    -webkit-backdrop-filter: blur(16px) saturate(170%);
+            backdrop-filter: blur(16px) saturate(170%);
+    border: 1px solid rgba(255, 255, 255, .3);
+    border-radius: 18px;
+  }
+
+  /* ---------- Herramientas ---------- */
+  #contenido .tab, #contenido .chip { background: rgba(255, 255, 255, .68); border-color: rgba(255, 255, 255, .8); }
+  #contenido .tab[aria-selected=true] { background: #061a2d; border-color: #061a2d; color: #f7f3ea; }
+  #contenido .inputs { background: rgba(243, 238, 227, .62); }
+  #contenido .out li { background: rgba(255, 255, 255, .56); border-color: rgba(6, 26, 45, .1); }
+  #contenido .ref { margin-top: 1.75rem; }
+  #contenido .ref h2 { font-size: 1.3rem; }
+
+  /* ---------- Páginas legales ---------- */
+  #contenido .legal { width: min(100% - 2.5rem, 760px); padding: clamp(1.25rem, 3vw, 2.25rem); font-size: 1rem; }
+  #contenido .legal h2 { font-size: 1.32rem; }
+
+  /* ---------- Borde de luz ---------- */
+  #contenido .form::before, #contenido .box::before, #contenido .rule::before, #contenido .panel::before, #contenido .legal::before {
+    content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none;
+    background: linear-gradient(135deg, rgba(255, 255, 255, .95), rgba(255, 255, 255, .1) 35%, rgba(255, 255, 255, 0) 60%, rgba(240, 194, 122, .5));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+            mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  }
+  #contenido .form, #contenido .box, #contenido .rule, #contenido .panel, #contenido .legal { position: relative; }
+}
+
+@media screen and (min-width: 861px) {
+  #contenido .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media screen and (max-width: 860px) {
+  #contenido > section:not(.page-hero) > .container:not(:has(#board)) { width: min(100% - 2.5rem, 660px); }
+  #contenido .contact-grid { grid-template-columns: minmax(0, 1fr); }
+  /* Paneles altos: en celular se ahorra el desenfoque */
+  #contenido .legal, #contenido .form, #contenido .board-wrap { -webkit-backdrop-filter: none; backdrop-filter: none; background: linear-gradient(150deg, rgba(255, 255, 255, .88), rgba(255, 255, 255, .74)); }
+}
+@media screen and (prefers-reduced-transparency: reduce) {
+  #contenido .form, #contenido .box, #contenido .steps li, #contenido .rule, #contenido .cta-row, #contenido .board-wrap, #contenido .panel, #contenido .legal { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  #contenido .side-card, #contenido .refcard, #contenido .results { background: #0b2640; -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  @media screen {
+    #contenido .form, #contenido .box, #contenido .steps li, #contenido .rule, #contenido .cta-row, #contenido .board-wrap, #contenido .panel, #contenido .legal { background: rgba(255, 255, 255, .92); }
+    #contenido .side-card, #contenido .refcard, #contenido .results { background: #0b2640; }
+  }
+}

@@ -1,0 +1,165 @@
+/* =========================================================
+   Artículos con el estilo de /blog/: curva en el encabezado,
+   fondo de luces, panel de lectura y barra lateral de vidrio,
+   todo centrado. Solo en pantalla: la impresión no cambia.
+   ========================================================= */
+@media screen {
+  /* ---------- Fondo de luces (mismo mosaico que el blog) ---------- */
+  #contenido {
+    background:
+      radial-gradient(520px 460px at 8% 345px, rgba(30, 79, 122, .42), transparent 70%) 0 0 / 100% 1500px repeat-y,
+      radial-gradient(480px 460px at 94% 520px, rgba(240, 194, 122, .62), transparent 70%) 0 0 / 100% 1500px repeat-y,
+      radial-gradient(420px 380px at 22% 980px, rgba(240, 194, 122, .5), transparent 70%) 0 0 / 100% 1500px repeat-y,
+      radial-gradient(560px 480px at 82% 1150px, rgba(30, 79, 122, .4), transparent 70%) 0 0 / 100% 1500px repeat-y,
+      #f3eee3;
+  }
+
+  /* ---------- La curva del encabezado ---------- */
+  #contenido .page-hero {
+    padding-bottom: calc(clamp(3.5rem, 8vw, 5.5rem) + 50px);
+    --wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath d='M1440 40 C1200 80 960 80 720 40 C480 0 240 80 0 40 V0 H1440 Z'/%3E%3C/svg%3E");
+    -webkit-mask: linear-gradient(#000 0 0) top / 100% calc(100% - 69px) no-repeat, var(--wave) bottom / 100% 70px no-repeat;
+            mask: linear-gradient(#000 0 0) top / 100% calc(100% - 69px) no-repeat, var(--wave) bottom / 100% 70px no-repeat;
+  }
+
+  /* ---------- Conjunto centrado ---------- */
+  #contenido .article-layout { padding-block: clamp(1.25rem, 3vw, 2.25rem) clamp(1.5rem, 3vw, 2.5rem); gap: 2.5rem; }
+
+  /* ---------- Panel de lectura: vidrio claro ---------- */
+  #contenido .article-body {
+    --p: clamp(1.15rem, 3vw, 2.25rem);
+    position: relative; isolation: isolate;
+    max-width: none; padding: var(--p);
+    font-size: 1rem; line-height: 1.72;
+    border-radius: 22px;
+    background: linear-gradient(150deg, rgba(255, 255, 255, .84), rgba(255, 255, 255, .66));
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+            backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, .75);
+    box-shadow: 0 18px 40px -20px rgba(6, 26, 45, .35), inset 0 1px 0 rgba(255, 255, 255, .9);
+  }
+  #contenido .article-body > figure.cover { margin: calc(.85rem - var(--p)) calc(.85rem - var(--p)) 1.15rem; }
+  #contenido .article-body .cover img { border-radius: 15px; box-shadow: none; display: block; }
+  #contenido .post-meta-line { color: #47566a; font-size: .78rem; margin-bottom: 1.25rem; }
+  #contenido .article-body h2 { font-size: 1.42rem; }
+  #contenido .article-body h3 { font-size: 1.15rem; }
+
+  #contenido .article-body blockquote { background: rgba(255, 255, 255, .62); box-shadow: none; border-radius: 0 12px 12px 0; }
+  #contenido .article-body li.task-list-item { background: rgba(255, 255, 255, .58); border-color: rgba(6, 26, 45, .1); border-radius: 11px; }
+  #contenido .article-body table { background: rgba(255, 255, 255, .6); border-radius: 12px; box-shadow: none; }
+  #contenido .article-body tbody tr:nth-child(2n) { background: rgba(243, 238, 227, .55); }
+  #contenido .article-body td { border-top-color: rgba(6, 26, 45, .1); }
+  #contenido .article-body code { background: rgba(30, 79, 122, .1); }
+  #contenido .share-box { background: rgba(255, 255, 255, .58); border-color: rgba(255, 255, 255, .8); border-radius: 15px; margin-top: 2rem !important; }
+
+  /* ---------- Barra lateral ---------- */
+  #contenido .toc,
+  #contenido .author-box {
+    position: relative;
+    padding: 1rem 1.05rem 1.1rem; border-radius: 18px;
+    background: linear-gradient(150deg, rgba(255, 255, 255, .74), rgba(255, 255, 255, .52));
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+            backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, .75);
+    box-shadow: 0 14px 30px -18px rgba(6, 26, 45, .32), inset 0 1px 0 rgba(255, 255, 255, .9);
+  }
+  #contenido .toc ol { border-left-color: rgba(6, 26, 45, .12); }
+  #contenido .toc a { font-size: .84rem; padding-block: .28rem; }
+  #contenido .author-box { padding: 1.05rem; }
+  #contenido .author-box p, #contenido .author-box span { color: #47566a; }
+  #contenido .tag { border-radius: 999px; background: rgba(255, 255, 255, .72); }
+  #contenido .article-aside .ad-free {
+    border-radius: 18px;
+    background:
+      linear-gradient(150deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, .02)),
+      linear-gradient(160deg, rgba(18, 61, 107, .88), rgba(6, 26, 45, .93));
+    -webkit-backdrop-filter: blur(16px) saturate(170%);
+            backdrop-filter: blur(16px) saturate(170%);
+    border: 1px solid rgba(255, 255, 255, .25);
+    box-shadow: 0 20px 40px -20px rgba(6, 26, 45, .6), inset 0 1px 0 rgba(255, 255, 255, .22);
+  }
+  #contenido .article-aside .ad-free::after { border-radius: 12px; }
+  #contenido .article-aside .ad-free-btn { border-radius: 999px; }
+
+  /* ---------- Borde de luz ---------- */
+  #contenido .article-body::before, #contenido .toc::before, #contenido .author-box::before {
+    content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none;
+    background: linear-gradient(135deg, rgba(255, 255, 255, .95), rgba(255, 255, 255, .1) 35%, rgba(255, 255, 255, 0) 60%, rgba(240, 194, 122, .5));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+            mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  }
+
+  /* ---------- Aviso final y "Sigue leyendo" ---------- */
+  #contenido .disclaimer {
+    width: min(100% - 2.5rem, 980px);
+    background: linear-gradient(150deg, rgba(255, 255, 255, .74), rgba(255, 255, 255, .52));
+    border: 1px solid rgba(255, 255, 255, .75); border-radius: 18px;
+    box-shadow: 0 14px 30px -18px rgba(6, 26, 45, .32);
+  }
+  #contenido .related { background: none; border-top: 0; }
+  #contenido .related .container { width: min(100% - 2.5rem, 980px); }
+  #contenido .related .card {
+    border-radius: 20px;
+    background: linear-gradient(150deg, rgba(255, 255, 255, .74), rgba(255, 255, 255, .52));
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+            backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, .75);
+    box-shadow: 0 18px 40px -20px rgba(6, 26, 45, .35), inset 0 1px 0 rgba(255, 255, 255, .9);
+  }
+}
+
+@media screen and (min-width: 981px) {
+  #contenido .article-layout { grid-template-columns: minmax(0, 640px) 300px; justify-content: center; }
+}
+@media screen and (max-width: 980px) {
+  #contenido .article-layout { max-width: 660px; margin-inline: auto; }
+  /* Panel muy alto: en celular se ahorra el desenfoque, que aquí casi no se aprecia */
+  #contenido .article-body { -webkit-backdrop-filter: none; backdrop-filter: none; background: linear-gradient(150deg, rgba(255, 255, 255, .88), rgba(255, 255, 255, .74)); }
+  #contenido .disclaimer { width: min(100% - 2.5rem, 660px); }
+}
+@media screen and (prefers-reduced-transparency: reduce) {
+  #contenido .article-body, #contenido .toc, #contenido .author-box, #contenido .related .card, #contenido .disclaimer { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  #contenido .article-aside .ad-free { background: #0b2640; -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  @media screen {
+    #contenido .article-body, #contenido .toc, #contenido .author-box, #contenido .related .card { background: rgba(255, 255, 255, .92); }
+    #contenido .article-aside .ad-free { background: #0b2640; }
+  }
+}
+
+/* Tablas a todo el ancho del panel; en celular conservan su scroll propio */
+@media screen and (min-width: 641px) {
+  #contenido .article-body table { display: table; }
+  #contenido .article-body th { white-space: normal; }
+}
+/* "Sigue leyendo": tres en fila dentro del ancho centrado */
+@media screen and (min-width: 861px) {
+  #contenido .related .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+}
+@media screen and (max-width: 860px) {
+  #contenido .related .container { width: min(100% - 2.5rem, 660px); }
+}
+
+/* "Sigue leyendo": sin icono y con la etiqueta sobre la imagen, como en /blog/ */
+@media screen {
+  #contenido .related .card-icon { display: none; }
+  #contenido .related .card-top {
+    position: absolute; top: 1rem; left: 1rem; z-index: 2;
+    flex-wrap: wrap; gap: .4rem; margin: 0; pointer-events: none;
+  }
+  #contenido .related .card-top .tag {
+    background: #061a2d; color: #f0c27a; border: 0;
+    font: 600 .72rem/1 var(--font-mono); letter-spacing: .1em; text-transform: uppercase;
+    padding: .45rem .65rem; border-radius: 4px;
+    box-shadow: 0 0 0 1px #f0c27a40;
+  }
+  #contenido .related .card-link { padding-top: 1.25rem; }
+}
+
+/* "Sigue leyendo": sin la fila inferior de sección, fecha y minutos */
+@media screen {
+  #contenido .related .card-meta { display: none; }
+  #contenido .related .card-link { padding-bottom: 1.35rem; }
+  #contenido .related .card-link p { margin-bottom: 0; }
+}
