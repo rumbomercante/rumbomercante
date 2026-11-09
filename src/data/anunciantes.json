@@ -1,0 +1,64 @@
+{
+  "anunciantes": [
+    {
+      "alt": "ImageNautica",
+      "nombre": "ImageNautica",
+      "etiqueta": "Web · Negocios marítimos",
+      "frase": "Si diriges una empresa marítima o portuaria, aquí tienes marketing digital hecho por gente que conoce el sector.",
+      "logo": "/img/anunciantes/imagenautica.png",
+      "formato": "wide",
+      "url": "https://imagenautica.com/",
+      "hueco": false
+    },
+    {
+      "alt": "Capea",
+      "nombre": "Capea",
+      "etiqueta": "Web · Comunidad marítima",
+      "frase": "La primera red social creada por y para la gente de mar: comunidad, blog profesional y directorio de empresas del sector.",
+      "logo": "/img/anunciantes/capea.png",
+      "formato": "wide",
+      "url": "https://capea.app/",
+      "hueco": false
+    },
+    {
+      "alt": "Easy Way to learn",
+      "nombre": "Easy Way",
+      "etiqueta": "Instagram · Inglés marítimo",
+      "frase": "Clases de inglés online y a tu medida, pensadas para trabajar en alta mar: el inglés que te van a pedir a bordo.",
+      "logo": "/img/anunciantes/easyway.jpg",
+      "formato": "square",
+      "url": "https://www.instagram.com/easyway.sea/",
+      "hueco": false
+    },
+    {
+      "alt": "Seafarers around the World",
+      "nombre": "Seafarers around the World",
+      "etiqueta": "Instagram · Comunidad",
+      "frase": "Casi 38.000 marinos comparten su día a día a bordo. Inspira, acompaña, y tu foto puede recorrer el mundo.",
+      "logo": "/img/anunciantes/seafarersw.jpg",
+      "formato": "square",
+      "url": "https://www.instagram.com/seafarersw/",
+      "hueco": false
+    },
+    {
+      "alt": "",
+      "nombre": "Coloca tu marca aquí",
+      "etiqueta": "Tu categoría · Tu web o red social",
+      "frase": "Describe tu negocio y sácale el mayor provecho de estar aquí publicado.",
+      "logo": "",
+      "formato": "empty",
+      "url": "/anunciate/",
+      "hueco": true
+    },
+    {
+      "alt": "",
+      "nombre": "Coloca tu marca aquí",
+      "etiqueta": "Tu categoría · Tu web o red social",
+      "frase": "Describe tu negocio y sácale el mayor provecho de estar aquí publicado.",
+      "logo": "",
+      "formato": "empty",
+      "url": "/anunciate/",
+      "hueco": true
+    }
+  ]
+}

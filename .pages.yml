@@ -1,0 +1,234 @@
+# Panel de Rumbo Mercante (Pages CMS)
+media:
+  input: public/img
+  output: /img
+
+settings:
+  content:
+    merge: true
+
+content:
+  - name: articulos
+    label: Entradas del blog
+    type: collection
+    path: src/content/articulos
+    format: yaml-frontmatter
+    filename:
+      template: "{slug}.md"
+      field: create
+    view:
+      fields: [titulo, categoria, fecha, publicado]
+      primary: titulo
+      sort: [fecha, titulo]
+      default:
+        sort: fecha
+        order: desc
+    fields:
+      - { name: titulo, label: Título, type: string, required: true }
+      - { name: descripcion, label: Resumen, type: text, required: true, description: "Aparece debajo del título y en las tarjetas." }
+      - { name: fecha, label: Fecha de publicación, type: date, required: true }
+      - { name: publicado, label: Publicado, type: boolean, default: true, description: "Desactívalo para guardar como borrador sin mostrarlo en la web." }
+      - name: categoria
+        label: Sección
+        type: select
+        required: true
+        description: "Forma parte de la dirección de la página. Si la cambias en un artículo ya publicado, agrega una redirección."
+        options:
+          values:
+            - { name: recursos/plantillas, label: "Recursos › Plantillas" }
+            - { name: recursos/checklists, label: "Recursos › Checklists" }
+            - { name: recursos/ingles-maritimo, label: "Recursos › Inglés marítimo" }
+            - { name: guias/sala-de-maquinas, label: "Guías › Sala de máquinas" }
+            - { name: guias/cubierta, label: "Guías › Cubierta y navegación" }
+            - { name: guias/seguridad, label: "Guías › Seguridad" }
+            - { name: guias/formacion, label: "Guías › Formación y estudios" }
+            - { name: vida-a-bordo/primer-embarque, label: "Vida a Bordo › Primer embarque" }
+            - { name: vida-a-bordo/bienestar, label: "Vida a Bordo › Bienestar y fatiga" }
+            - { name: vida-a-bordo/carrera-profesional, label: "Vida a Bordo › Carrera profesional" }
+            - { name: actualidad/normativa, label: "Actualidad › Normativa" }
+            - { name: actualidad/industria, label: "Actualidad › Industria" }
+            - { name: actualidad/novedades, label: "Actualidad › Novedades del sitio" }
+      - name: tipo
+        label: Tipo de contenido
+        type: select
+        required: true
+        description: "Es la etiqueta que aparece sobre la imagen."
+        options:
+          values: [Guía, Artículo, Checklist, Glosario, Plantilla, Noticia]
+      - { name: imagen, label: Imagen principal, type: image, required: true, options: { path: public/img/articulos } }
+      - { name: imagenAlt, label: Descripción de la imagen, type: string, description: "Para buscadores y personas que no pueden ver la imagen." }
+      - { name: minutos, label: Minutos de lectura, type: number, description: "Déjalo vacío para calcularlo automáticamente." }
+      - { name: etiquetas, label: Etiquetas, type: string, list: true }
+      - { name: imprimible, label: Mostrar botón de imprimir, type: boolean, default: false }
+      - { name: descargaUrl, label: Archivo descargable (dirección), type: string, description: "Por ejemplo /descargas/archivo.csv. Déjalo vacío si no hay descarga." }
+      - { name: descargaTexto, label: Texto del botón de descarga, type: string }
+      - name: seo
+        label: SEO de este artículo
+        type: object
+        fields:
+          - { name: titulo, label: Título para Google, type: string, description: "Ideal: hasta 60 caracteres. Vacío usa el título del artículo.", options: { maxlength: 70 } }
+          - { name: descripcion, label: Descripción para Google, type: text, description: "Ideal: entre 120 y 160 caracteres. Vacío usa el resumen.", options: { maxlength: 170 } }
+          - { name: imagen, label: Imagen para redes sociales, type: image, options: { path: public/og/articulos } }
+          - { name: palabraClave, label: Palabra clave objetivo, type: string, description: "Nota interna para orientar el artículo; no se publica." }
+          - { name: noindex, label: Ocultar de Google, type: boolean, default: false }
+      - name: body
+        label: Contenido
+        type: rich-text
+        options:
+          format: markdown
+          switcher: true
+          path: public/img/articulos
+
+  - name: anunciantes
+    label: Anunciantes
+    type: file
+    path: src/data/anunciantes.json
+    format: json
+    fields:
+      - name: anunciantes
+        label: Tarjetas de la portada
+        type: object
+        list: { collapsible: true }
+        fields:
+          - { name: nombre, label: Nombre, type: string, required: true }
+          - { name: etiqueta, label: Categoría (línea superior), type: string }
+          - { name: frase, label: Frase, type: text }
+          - { name: logo, label: Logo, type: image, options: { path: public/img/anunciantes } }
+          - { name: alt, label: Descripción del logo, type: string }
+          - name: formato
+            label: Forma del logo
+            type: select
+            options:
+              values:
+                - { name: wide, label: Ancho }
+                - { name: square, label: Cuadrado }
+          - { name: url, label: Enlace, type: string, required: true }
+          - { name: hueco, label: Tarjeta de "Coloca tu marca aquí", type: boolean, default: false, description: "Actívalo para mostrar un espacio libre en vez de un anunciante." }
+
+  - name: anunciate
+    label: Página Anúnciate
+    type: file
+    path: src/data/anunciate.json
+    format: json
+    fields:
+      - { name: titulo, label: Título, type: string, required: true }
+      - { name: introduccion, label: Introducción, type: text }
+      - { name: textoGratis, label: Texto de la pastilla superior, type: string }
+      - name: modalidades
+        label: Modalidades (¿a quién va dirigido?)
+        type: object
+        list: { collapsible: true }
+        fields:
+          - { name: titulo, label: Título, type: string, required: true }
+          - { name: texto, label: Texto, type: text }
+      - name: planes
+        label: Planes (opcional)
+        description: "Si agregas planes, aparece una sección nueva en la página."
+        type: object
+        list: { collapsible: true }
+        fields:
+          - { name: nombre, label: Nombre del plan, type: string, required: true }
+          - { name: precio, label: Precio, type: string }
+          - { name: descripcion, label: Qué incluye, type: text }
+      - name: pasos
+        label: Cómo funciona
+        type: object
+        list: { collapsible: true }
+        fields:
+          - { name: titulo, label: Título, type: string, required: true }
+          - { name: texto, label: Texto, type: text }
+      - { name: nota, label: Nota final, type: text }
+      - { name: ctaTitulo, label: Título de la franja final, type: string }
+      - { name: ctaBoton, label: Texto del botón final, type: string }
+      - { name: promoVisible, label: Mostrar aviso en la portada, type: boolean, default: true }
+      - { name: promoTitulo, label: Título del aviso en la portada, type: string }
+      - { name: promoTexto, label: Texto del aviso en la portada, type: text }
+
+  - name: portada
+    label: Portada
+    type: file
+    path: src/data/portada.json
+    format: json
+    fields:
+      - name: destacados
+        label: Artículos destacados
+        type: reference
+        options:
+          collection: articulos
+          multiple: true
+          max: 3
+          value: "{name}"
+          label: "{primary}"
+      - { name: fotoPortada, label: Foto de portada, type: image, description: "Déjala vacía para usar la foto actual.", options: { path: public/img } }
+      - { name: mostrarSecciones, label: "Mostrar \"Cuatro secciones\"", type: boolean, default: true }
+      - { name: mostrarDestacados, label: Mostrar Destacados, type: boolean, default: true }
+      - { name: mostrarUltimas, label: Mostrar Últimas publicaciones, type: boolean, default: true }
+      - { name: mostrarHerramientas, label: Mostrar Herramientas, type: boolean, default: true }
+      - { name: mostrarAnunciantes, label: Mostrar Anunciantes, type: boolean, default: true }
+
+  - name: apariencia
+    label: Apariencia
+    type: file
+    path: src/data/apariencia.json
+    format: json
+    fields:
+      - name: acento
+        label: Color de acento
+        type: select
+        options:
+          values:
+            - { name: dorado, label: Dorado (actual) }
+            - { name: cobre, label: Cobre }
+            - { name: turquesa, label: Turquesa }
+            - { name: plata, label: Plata }
+      - name: translucidez
+        label: Translucidez de las tarjetas azules
+        type: select
+        options:
+          values:
+            - { name: actual, label: Actual }
+            - { name: mas, label: Más translúcidas }
+            - { name: menos, label: Más sólidas }
+
+  - name: seo
+    label: SEO general
+    type: file
+    path: src/data/seo.json
+    format: json
+    fields:
+      - { name: url, label: Dirección del sitio, type: string, required: true, description: "Cámbiala cuando tengas el dominio. Sin barra al final." }
+      - { name: nombre, label: Nombre del sitio, type: string, required: true }
+      - { name: correoContacto, label: Correo de contacto, type: string, required: true }
+      - { name: verificacionGoogle, label: Código de Google Search Console, type: string }
+      - { name: verificacionBing, label: Código de Bing, type: string }
+
+  - name: paginas
+    label: SEO de cada página
+    type: file
+    path: src/data/paginas.json
+    format: json
+    fields:
+      - name: paginas
+        label: Páginas
+        type: object
+        list: { collapsible: true }
+        fields:
+          - { name: ruta, label: Página, type: string, readonly: true }
+          - { name: titulo, label: Título para Google, type: string }
+          - { name: descripcion, label: Descripción para Google, type: text }
+          - { name: noindex, label: Ocultar de Google, type: boolean, default: false }
+
+  - name: redirecciones
+    label: Redirecciones
+    type: file
+    path: vercel.json
+    format: json
+    fields:
+      - name: redirects
+        label: Direcciones que se envían a otra
+        type: object
+        list: { collapsible: true }
+        fields:
+          - { name: source, label: Dirección antigua, type: string, required: true }
+          - { name: destination, label: Dirección nueva, type: string, required: true }
+          - { name: permanent, label: Permanente, type: boolean, default: true }

@@ -1,0 +1,40 @@
+{
+  "titulo": "Llega a la gente de mar",
+  "introduccion": "Rumbo Mercante reúne a estudiantes, cadetes, pasantes y oficiales de cubierta y máquinas. Si tu empresa ofrece formación, empleo, equipamiento o servicios marítimos, este es tu espacio.",
+  "textoGratis": "Gratis durante el lanzamiento",
+  "modalidades": [
+    {
+      "titulo": "Formación",
+      "texto": "Academias, escuelas náuticas y centros de formación STCW, cursos de inglés marítimo y preparación de exámenes."
+    },
+    {
+      "titulo": "Empleo",
+      "texto": "Navieras, agencias de tripulación y empresas que buscan cadetes, oficiales y personal técnico."
+    },
+    {
+      "titulo": "Productos y servicios",
+      "texto": "Equipamiento de trabajo, EPI, uniformes, seguros, servicios técnicos, conectividad y todo lo que la gente de mar necesita."
+    }
+  ],
+  "pasos": [
+    {
+      "titulo": "Escríbenos",
+      "texto": "Cuéntanos quién eres y qué ofreces a través del formulario de contacto."
+    },
+    {
+      "titulo": "Envía tu logo y enlace",
+      "texto": "Un logo en buena calidad, una frase descriptiva y la web a la que quieres dirigir a los visitantes."
+    },
+    {
+      "titulo": "Aparece en la portada",
+      "texto": "Tu marca se muestra en la sección de anunciantes de la página de inicio."
+    }
+  ],
+  "nota": "Solo se aceptan anunciantes relacionados con el sector marítimo y que aporten valor a la gente de mar. Los espacios gratuitos del lanzamiento son limitados; más adelante se ofrecerán planes de pago.",
+  "ctaTitulo": "¿Hablamos?",
+  "ctaBoton": "Solicitar un espacio",
+  "planes": [],
+  "promoVisible": true,
+  "promoTitulo": "Anúnciate gratis",
+  "promoTexto": "Durante el lanzamiento, los espacios para anunciantes no tienen coste."
+}

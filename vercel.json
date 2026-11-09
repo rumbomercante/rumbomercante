@@ -1,4 +1,7 @@
 {
+  "framework": "astro",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "redirects": [
     { "source": "/publicaciones", "destination": "/blog/", "permanent": true },
     { "source": "/publicaciones/", "destination": "/blog/", "permanent": true }
