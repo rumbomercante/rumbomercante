@@ -1,0 +1,19 @@
+/* Foto de portacontenedores detrás de la cabecera de Contacto.
+   Mismos degradados que el resto de cabeceras, algo traslúcidos, encima de la foto.
+   Foto: Nathan Cima (@nathan_cima) en Unsplash. */
+.page-hero[data-astro-cid-75ysl5lo] {
+  background:
+    radial-gradient(ellipse at 85% 0%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 55%),
+    linear-gradient(180deg, rgba(6, 26, 45, .86), rgba(11, 38, 64, .66)),
+    url("/img/portacontenedores-contacto.webp") center 85% / cover no-repeat,
+    var(--navy-900);
+}
+@media (max-width: 700px) {
+  .page-hero[data-astro-cid-75ysl5lo] {
+    background:
+      radial-gradient(ellipse at 85% 0%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 55%),
+      linear-gradient(180deg, rgba(6, 26, 45, .88), rgba(11, 38, 64, .72)),
+      url("/img/portacontenedores-contacto-sm.webp") 70% 60% / cover no-repeat,
+      var(--navy-900);
+  }
+}

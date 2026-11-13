@@ -163,3 +163,12 @@
   #contenido .related .card-link { padding-bottom: 1.35rem; }
   #contenido .related .card-link p { margin-bottom: 0; }
 }
+
+/* ---------- "Anúnciate aquí" flotante, como en el blog ----------
+   En escritorio la barra lateral ocupa todo el alto del artículo y el
+   anuncio se queda a la vista al bajar. En móvil todo sigue igual. */
+@media (min-width: 981px) {
+  #contenido .article-aside { align-self: stretch; }
+  #contenido .article-aside > .sticky { height: 100%; align-content: start; }
+  #contenido .article-aside .ad-free { position: sticky; top: calc(var(--header-h, 72px) + 1.25rem); }
+}
