@@ -138,3 +138,23 @@
   .post-std .post-info { flex-wrap: nowrap; font-size: .75rem; white-space: nowrap; }
   .post-std .post-info > span { padding-right: .6rem; margin-right: .55rem; }
 }
+
+/* ---------- Foto del crucero detrás de la cabecera ----------
+   Los mismos degradados de siempre, ahora algo traslúcidos, encima de la foto.
+   Foto: Peter Hansen (@petross) en Unsplash. */
+.page-hero[data-astro-cid-75ysl5lo] {
+  background:
+    radial-gradient(ellipse at 85% 0%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 55%),
+    linear-gradient(180deg, rgba(6, 26, 45, .86), rgba(11, 38, 64, .66)),
+    url("/img/crucero-blog.webp") center 70% / cover no-repeat,
+    var(--navy-900);
+}
+@media (max-width: 700px) {
+  .page-hero[data-astro-cid-75ysl5lo] {
+    background:
+      radial-gradient(ellipse at 85% 0%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 55%),
+      linear-gradient(180deg, rgba(6, 26, 45, .88), rgba(11, 38, 64, .72)),
+      url("/img/crucero-blog-sm.webp") 75% 60% / cover no-repeat,
+      var(--navy-900);
+  }
+}
