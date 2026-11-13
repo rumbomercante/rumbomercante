@@ -1,7 +1,7 @@
 {
   "titulo": "Llega a la gente de mar",
   "introduccion": "Rumbo Mercante reúne a estudiantes, cadetes, pasantes y oficiales de cubierta y máquinas. Si tu empresa ofrece formación, empleo, equipamiento o servicios marítimos, este es tu espacio.",
-  "textoGratis": "Aprovecha publicarte por tiempo limitado",
+  "textoGratis": "Gratis durante el lanzamiento",
   "modalidades": [
     {
       "titulo": "Formación",
@@ -31,9 +31,10 @@
     }
   ],
   "nota": "Solo se aceptan anunciantes relacionados con el sector marítimo y que aporten valor a la gente de mar. Los espacios gratuitos del lanzamiento son limitados; más adelante se ofrecerán planes de pago.",
-  "ctaTitulo": "Contáctanos y descubre el procedimiento para anunciarse!!",
+  "ctaTitulo": "¿Hablamos?",
   "ctaBoton": "Solicitar un espacio",
+  "planes": [],
   "promoVisible": true,
   "promoTitulo": "Anúnciate gratis",
-  "promoTexto": "Por tiempo limitado los espacios para anunciantes no tienen coste."
+  "promoTexto": "Durante el lanzamiento, los espacios para anunciantes no tienen coste."
 }
