@@ -19,7 +19,7 @@ display_url: https://rumbomercante.vercel.app
 locale: es
 app_title: Panel de Rumbo Mercante
 logo:
-  src: /favicon.svg
+  src: /admin/icono-panel.svg
   show_in_header: true
 media_folder: /public/img
 # Al subir una imagen, el panel la convierte a WebP y la reduce (como los plugins de WordPress).
