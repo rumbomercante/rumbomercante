@@ -85,3 +85,12 @@
 .byline-link { color: inherit; text-decoration: underline; text-decoration-color: currentColor; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 .byline-link:hover { text-decoration-thickness: 2px; }
 .post-info > span:not(:last-child)::after { top: 50%; translate: 0 -50%; }
+
+/* ---------- Redes sociales en el pie (se muestran solo si se añaden en el panel) ---------- */
+.footer-redes { display: flex; flex-wrap: wrap; gap: .55rem; margin: 1.1rem 0 0; padding: 0; list-style: none; }
+.footer-redes a {
+  display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%;
+  color: var(--brass-light, #f0c27a); border: 1px solid rgba(240, 194, 122, .35); background: rgba(255, 255, 255, .04);
+  transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+.footer-redes a:hover, .footer-redes a:focus-visible { background: var(--brass, #f0c27a); color: var(--navy-950, #03101d); border-color: transparent; }

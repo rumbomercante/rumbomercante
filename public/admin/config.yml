@@ -185,6 +185,194 @@ collections:
           - { name: mostrarUltimas, label: Mostrar Últimas publicaciones, widget: boolean, default: true, required: false }
           - { name: mostrarHerramientas, label: Mostrar Herramientas, widget: boolean, default: true, required: false }
           - { name: mostrarAnunciantes, label: Mostrar Anunciantes, widget: boolean, default: true, required: false }
+          - name: textos
+            label: Textos de la portada
+            hint: "«Resaltado» es la parte final del título que aparece en cursiva y en otro color."
+            widget: object
+            collapsed: true
+            fields:
+              - name: hero
+                label: Cabecera (lo primero que se ve)
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: etiqueta, label: Línea superior, widget: string }
+                  - { name: titulo, label: Título, widget: text }
+                  - { name: resaltado, label: Título · resaltado, widget: string }
+                  - { name: texto, label: Texto, widget: text }
+                  - { name: boton1, label: Botón principal, widget: string }
+                  - { name: boton2, label: Botón secundario, widget: string }
+              - name: secciones
+                label: Cuatro secciones
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: etiqueta, label: Línea superior, widget: string }
+                  - { name: titulo, label: Título, widget: string }
+                  - { name: resaltado, label: Título · resaltado, widget: string }
+                  - { name: recursos, label: Texto de Recursos, widget: text }
+                  - { name: guias, label: Texto de Guías y Operaciones, widget: text }
+                  - { name: vidaABordo, label: Texto de Vida a Bordo, widget: text }
+                  - { name: actualidad, label: Texto de Actualidad Marítima, widget: text }
+              - name: destacados
+                label: Destacados
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: etiqueta, label: Línea superior, widget: string }
+                  - { name: titulo, label: Título, widget: string }
+                  - { name: resaltado, label: Título · resaltado, widget: string }
+                  - { name: texto, label: Texto, widget: text }
+                  - { name: boton, label: Botón, widget: string }
+              - name: ultimas
+                label: Últimas publicaciones
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: etiqueta, label: Línea superior, widget: string }
+                  - { name: titulo, label: Título, widget: string }
+                  - { name: boton, label: Botón, widget: string }
+              - name: herramientas
+                label: Herramientas
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: etiqueta, label: Línea superior, widget: string }
+                  - { name: titulo, label: Título, widget: string }
+                  - { name: resaltado, label: Título · resaltado, widget: string }
+                  - { name: calcTitulo, label: Calculadora · título, widget: string }
+                  - { name: calcTexto, label: Calculadora · texto, widget: text }
+                  - { name: convTitulo, label: Conversor · título, widget: string }
+                  - { name: convTexto, label: Conversor · texto, widget: text }
+              - name: anunciantes
+                label: Anunciantes
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: etiqueta, label: Línea superior, widget: string }
+                  - { name: titulo, label: Título, widget: string }
+                  - { name: texto, label: Texto, widget: text }
+                  - { name: boton, label: Botón, widget: string }
+                  - { name: frase, label: Frase junto al botón, widget: string }
+
+  - divider: true
+
+  # ---------------- Páginas, menú y pie ----------------
+  - name: paginas-editables
+    label: Páginas, menú y pie
+    icon: web
+    description: Nosotros, las páginas legales, el menú superior y el pie de página con tus redes sociales.
+    files:
+      - name: nosotros
+        label: Nosotros
+        file: src/content/paginas/nosotros.md
+        format: frontmatter
+        editor: { preview: false }
+        fields:
+          - { name: titulo, label: Título de la página, widget: string }
+          - { name: foto, label: Foto, widget: image, required: false, media_folder: /public/img, public_folder: /img, hint: "Mejor cuadrada (por ejemplo 800 × 800). Vacía usa la foto actual." }
+          - { name: nombre, label: Nombre, widget: string, hint: "También aparece como autor en los artículos." }
+          - { name: cargo, label: Cargo, widget: string, hint: "También aparece en la tarjeta de autor de los artículos." }
+          - { name: datos, label: Datos bajo la foto, widget: list }
+          - { name: resumenAutor, label: Resumen para la tarjeta de autor, widget: text, maxlength: 140, hint: "Una o dos frases que aparecen en la tarjeta de autor de cada artículo." }
+          - { name: body, label: Tu historia, widget: markdown, editor_components: [image] }
+          - { name: cierre, label: Frase de cierre, widget: string }
+          - { name: firma, label: Firma, widget: string }
+          - { name: valoresTitulo, label: Título de los recuadros, widget: string }
+          - name: valores
+            label: Recuadros «Lo que encontrarás aquí»
+            widget: list
+            summary: "{{titulo}}"
+            fields:
+              - { name: titulo, label: Título, widget: string }
+              - { name: texto, label: Texto, widget: text }
+          - { name: ctaTitulo, label: Pregunta final, widget: string }
+          - { name: ctaBoton, label: Texto del botón final, widget: string }
+      - name: privacidad
+        label: Política de privacidad
+        file: src/content/paginas/politica-de-privacidad.md
+        format: frontmatter
+        editor: { preview: false }
+        fields:
+          - { name: titulo, label: Título, widget: string }
+          - { name: etiqueta, label: Línea superior, widget: string }
+          - { name: actualizado, label: Última actualización, widget: datetime, type: date, input_timezone: utc, hint: "Cámbiala cada vez que modifiques el texto." }
+          - { name: body, label: Texto, widget: markdown, editor_components: [] }
+      - name: terminos
+        label: Términos de uso
+        file: src/content/paginas/terminos.md
+        format: frontmatter
+        editor: { preview: false }
+        fields:
+          - { name: titulo, label: Título, widget: string }
+          - { name: etiqueta, label: Línea superior, widget: string }
+          - { name: actualizado, label: Última actualización, widget: datetime, type: date, input_timezone: utc, hint: "Cámbiala cada vez que modifiques el texto." }
+          - { name: body, label: Texto, widget: markdown, editor_components: [] }
+      - name: menu
+        label: Menú superior
+        file: src/data/menu.json
+        format: json
+        editor: { preview: false }
+        fields:
+          - name: enlaces
+            label: Enlaces del menú
+            widget: list
+            summary: "{{texto}} → {{url}}"
+            hint: "Arrastra para cambiar el orden. Mejor no más de 5 para que quepa en el móvil."
+            fields:
+              - { name: texto, label: Texto, widget: string }
+              - { name: url, label: Dirección, widget: string, hint: "Por ejemplo /blog/ o /recursos/" }
+          - name: boton
+            label: Botón destacado (a la derecha)
+            widget: object
+            fields:
+              - { name: texto, label: Texto, widget: string, required: false, hint: "Déjalo vacío para no mostrar botón." }
+              - { name: url, label: Dirección, widget: string, required: false }
+      - name: pie
+        label: Pie de página y redes sociales
+        file: src/data/pie.json
+        format: json
+        editor: { preview: false }
+        fields:
+          - { name: lema, label: Frase bajo el logo, widget: text }
+          - { name: firma, label: Frase en cursiva, widget: string }
+          - name: redes
+            label: Redes sociales
+            widget: list
+            required: false
+            summary: "{{red}}"
+            hint: "Aparecen como iconos bajo el logo, en todas las páginas."
+            fields:
+              - name: red
+                label: Red
+                widget: select
+                options:
+                  - { value: instagram, label: Instagram }
+                  - { value: facebook, label: Facebook }
+                  - { value: whatsapp, label: WhatsApp }
+                  - { value: youtube, label: YouTube }
+                  - { value: tiktok, label: TikTok }
+                  - { value: linkedin, label: LinkedIn }
+                  - { value: x, label: X (Twitter) }
+                  - { value: telegram, label: Telegram }
+                  - { value: correo, label: Correo electrónico }
+              - { name: url, label: Enlace, widget: string, hint: "Por ejemplo https://instagram.com/rumbomercante · para WhatsApp: https://wa.me/58412... · para correo: mailto:tu@correo.com" }
+          - name: columnas
+            label: Columnas de enlaces
+            widget: list
+            summary: "{{titulo}}"
+            fields:
+              - { name: titulo, label: Título de la columna, widget: string }
+              - name: enlaces
+                label: Enlaces
+                widget: list
+                summary: "{{texto}}"
+                fields:
+                  - { name: texto, label: Texto, widget: string }
+                  - { name: url, label: Dirección, widget: string }
+                  - { name: externo, label: Es de otra web (abre en otra pestaña), widget: boolean, default: false, required: false }
+          - { name: copyright, label: Texto de derechos, widget: string }
+          - { name: coordenadas, label: Coordenadas (abajo a la derecha), widget: string }
 
   # ---------------- Apariencia y SEO ----------------
   - name: apariencia-seo

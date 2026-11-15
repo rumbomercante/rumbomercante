@@ -1,0 +1,20 @@
+{
+  "enlaces": [
+    {
+      "texto": "Inicio",
+      "url": "/"
+    },
+    {
+      "texto": "Blog",
+      "url": "/blog/"
+    },
+    {
+      "texto": "Nosotros",
+      "url": "/nosotros/"
+    }
+  ],
+  "boton": {
+    "texto": "Contacto",
+    "url": "/contacto/"
+  }
+}

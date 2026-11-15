@@ -60,9 +60,47 @@ const verificacion = () => (seo.verificacionGoogle ? `<meta name="google-site-ve
 const ld = (o) => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, '\\u003c')}</script>`;
 const NOINDEX = '<meta name="robots" content="noindex">';
 
-const envolver = (tipo, meta, main, analytics, extra = '') => {
+// ---------- Menú superior y pie de página (editables en el panel) ----------
+const menu = json('data/menu.json');
+const pie = json('data/pie.json');
+const PIE = leer('plantillas/pie.html');
+const EXTERNO = leer('plantillas/pie-externo.svg');
+const CN = ' data-astro-cid-nen7h5rs';
+const CF = ' data-astro-cid-jo6i4kqk';
+const navHtml = (ruta) => `<ul id="nav-list"${CN}>` +
+  menu.enlaces.map((e) => `<li${CN}><a href="${esc(e.url)}"${e.url === ruta ? ' aria-current="page"' : ''}${CN}>${esc(e.texto)}</a></li>`).join('') +
+  (menu.boton?.texto ? `<li class="nav-cta"${CN}><a href="${esc(menu.boton.url)}" class="btn btn-brass btn-sm"${CN}>${esc(menu.boton.texto)}</a></li>` : '') + '</ul>';
+const ICONOS_REDES = {
+  instagram: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>',
+  facebook: '<path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/>',
+  whatsapp: '<path d="M3.5 20.5l1.3-4.3A8.5 8.5 0 1 1 8 19.3z"/><path d="M9 8.5c0 3.6 2.9 6.5 6.5 6.5l1-1.6-2-1-1 1a4.5 4.5 0 0 1-2.4-2.4l1-1-1-2z"/>',
+  youtube: '<rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10 9.2v5.6l4.8-2.8z" fill="currentColor"/>',
+  tiktok: '<path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3a5 5 0 0 0 5 5"/>',
+  linkedin: '<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/>',
+  x: '<path d="M4 4l16 16M20 4L4 20"/>',
+  telegram: '<path d="M21 4L3 11l6 2 2 6 3-4 5 4z"/><path d="M9 13l8-6"/>',
+  correo: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
+};
+const NOMBRE_RED = { instagram: 'Instagram', facebook: 'Facebook', whatsapp: 'WhatsApp', youtube: 'YouTube', tiktok: 'TikTok', linkedin: 'LinkedIn', x: 'X', telegram: 'Telegram', correo: 'Correo' };
+const redesHtml = () => {
+  const redes = (pie.redes ?? []).filter((r) => r.url && ICONOS_REDES[r.red]);
+  if (!redes.length) return '';
+  return `<ul class="footer-redes" aria-label="Redes sociales"${CF}>` + redes.map((r) => {
+    const externo = /^https?:/.test(r.url);
+    return `<li${CF}><a href="${esc(r.url)}"${externo ? ' target="_blank" rel="noopener"' : ''} aria-label="${esc(NOMBRE_RED[r.red])}"${CF}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONOS_REDES[r.red]}</svg></a></li>`;
+  }).join('') + '</ul>';
+};
+const pieHtml = () => fill(PIE, {
+  LEMA: esc(pie.lema), FIRMA: esc(pie.firma), REDES: redesHtml(), COPY: esc(pie.copyright), COORDS: esc(pie.coordenadas),
+  COLUMNAS: pie.columnas.map((c) => `<div${CF}><h3${CF}>${esc(c.titulo)}</h3><ul${CF}>` + c.enlaces.map((e) =>
+    `<li${CF}><a href="${esc(e.url)}"${e.externo ? ' target="_blank" rel="noopener"' : ''}${CF}>${esc(e.texto)}${e.externo ? ' ' + EXTERNO : ''}</a></li>`).join('') + '</ul></div>').join(''),
+});
+
+const envolver = (tipo, meta, main, analytics, extra = '', ruta = '') => {
   const s = SHELLS[tipo];
-  const out = s.doc + verificacion() + meta + fill(s.tail + cssApariencia() + extra, { SITE }) + '</head>' + fill(s.pre, { SITE }) + main + fill(s.post, { SITE, ANALYTICS: analytics });
+  const pre = fill(s.pre, { SITE }).replace(/<ul id="nav-list"[\s\S]*?<\/ul>/, () => navHtml(ruta));
+  const post = fill(s.post, { SITE, ANALYTICS: analytics }).replace(/<footer[\s\S]*?<\/footer>/, () => pieHtml());
+  const out = s.doc + verificacion() + meta + fill(s.tail + cssApariencia() + extra, { SITE }) + '</head>' + pre + main + post;
   return out;
 };
 const reemplazaValor = (m, viejo, nuevo) => (viejo === nuevo ? m : m.split(`"${esc(viejo)}"`).join(`"${esc(nuevo)}"`).split(`>${esc(viejo)}<`).join(`>${esc(nuevo)}<`));
@@ -103,12 +141,12 @@ function articulo(p, posts) {
   const img = p.seo?.imagen || p.imagen;
   const meta = fill(I.artMeta, { OGW: p.seo?.imagen ? 1200 : (p.imagenAncho || 1200), OGH: p.seo?.imagen ? 630 : (p.imagenAlto || 630), SITE, PATH: p.ruta, OGIMG: img.startsWith('http') ? img : SITE + img, SEOT: esc(t), SEOD: esc(d), ALT_OG: esc(p.titulo), FECHA: p.iso });
   const analytics = `<vercel-analytics data-props="{}" data-params="${esc(JSON.stringify({ categoria: p.seccion, sub: p.subseccion, slug: p.slug }))}" data-pathname="${p.ruta}"></vercel-analytics>`;
-  const autor = { '@type': 'Person', name: 'Jhonny Castorani', url: `${SITE}/nosotros/` };
+  const autor = { '@type': 'Person', name: AUTOR, url: `${SITE}/nosotros/` };
   const datos = ld({ '@context': 'https://schema.org', '@graph': [
     { '@type': 'Article', headline: p.titulo, description: d, datePublished: p.iso, image: img.startsWith('http') ? img : SITE + img, author: autor, publisher: { '@type': 'Organization', name: seo.nombre, url: SITE }, mainEntityOfPage: url, inLanguage: 'es' },
     { '@type': 'BreadcrumbList', itemListElement: [['Inicio', '/'], [p.sec.corta, `/${p.seccion}/`], [p.subLabel, `/${p.seccion}/${p.subseccion}/`], [p.titulo, p.ruta]].map(([name, r], i) => ({ '@type': 'ListItem', position: i + 1, name, item: SITE + r })) },
   ] });
-  return envolver('articulo', (p.seo?.noindex ? NOINDEX : '') + meta, main, analytics, datos);
+  return envolver('articulo', (p.seo?.noindex ? NOINDEX : '') + meta, main, analytics, datos, p.ruta);
 }
 
 function seccion(k, posts) {
@@ -163,7 +201,9 @@ function portadaHtml(posts) {
   if (portada.mostrarHerramientas === false) quita('class="dm-tools"');
   if (portada.mostrarAnunciantes === false) quita('class="ad-marquee"');
   h = anunciate.promoVisible === false ? h.replace(/<div class="promo"[\s\S]*?<\/div>/, '') : h.replace('Anúnciate gratis<', `${esc(anunciate.promoTitulo)}<`).replace('Durante el lanzamiento, los espacios para anunciantes no tienen coste.', esc(anunciate.promoTexto));
-  return fill(h, { SITE, START, SLIDES, ADS });
+  const TX = {};
+  for (const [g, campos] of Object.entries(portada.textos ?? {})) for (const [k, v] of Object.entries(campos)) TX[`TX_${g}_${k}`] = esc(v);
+  return fill(h, { SITE, START, SLIDES, ADS, ...TX });
 }
 
 function anunciatePag() {
@@ -178,7 +218,38 @@ function anunciatePag() {
   return fill(base.replace('<section class="section-tight steps-band"', `${bloque}<section class="section-tight steps-band"`), { SITE, TITULO: esc(anunciate.titulo), INTRO: esc(anunciate.introduccion), GRATIS: esc(anunciate.textoGratis), BOXES, STEPS, NOTA: esc(anunciate.nota), CTAT: esc(anunciate.ctaTitulo), CTAB: esc(anunciate.ctaBoton) });
 }
 
-export function paginas(posts) {
+// ---------- Nosotros y páginas legales (Markdown editable en el panel) ----------
+const PZ = json('plantillas/nosotros-piezas.json');
+const CW = ' data-astro-cid-w6fzp2su';
+function nosotrosPag(e) {
+  const d = e.data;
+  const foto = d.foto
+    ? `<img src="${esc(d.foto)}" fetchpriority="high" alt="${esc(d.nombre)}" width="600" height="600"${CW}>`
+    : PZ.foto.replace('alt="Jhonny Castorani"', `alt="${esc(d.nombre)}"`);
+  const DATOS = (d.datos ?? []).map((x, i) => `<li${CW}>${PZ.iconosDatos[i % PZ.iconosDatos.length]} ${esc(x)}</li>`).join('');
+  const VALORES = (d.valores ?? []).map((v, i) => `<div class="value reveal"${CW}>${PZ.iconosValores[i % PZ.iconosValores.length]}<h3${CW}>${esc(v.titulo)}</h3><p${CW}>${esc(v.texto)}</p></div>`).join('');
+  return fill(pagina('nosotros'), {
+    SITE, N_TITULO: esc(d.titulo), N_FOTO: foto, N_NOMBRE: esc(d.nombre), N_CARGO: esc(d.cargo), N_DATOS: DATOS,
+    N_HISTORIA: e.rendered?.html ?? '', N_CIERRE: esc(d.cierre), N_FIRMA: esc(d.firma),
+    N_VALORES_TITULO: esc(d.valoresTitulo), N_VALORES: VALORES, N_CTA_TITULO: esc(d.ctaTitulo), N_CTA_BOTON: esc(d.ctaBoton),
+  });
+}
+const legalPag = (clave, e) => fill(pagina(clave), {
+  SITE, TITULO: esc(e.data.titulo), ETIQUETA: esc(e.data.etiqueta ?? 'Información legal'),
+  ACTUALIZADO: e.data.actualizado ? fechaTxt(e.data.actualizado) : '', CUERPO: e.rendered?.html ?? '',
+});
+// La tarjeta de autor y la firma de los artículos usan los datos de Nosotros.
+function aplicarAutor(n) {
+  if (!n) return;
+  const cambios = [['Jhonny Castorani', esc(n.nombre)], ['2do Oficial de Máquinas', esc(n.cargo)], ['Graduado hace 8 años, con experiencia consolidada a bordo de buques de pasajeros.', esc(n.resumenAutor)]];
+  for (const k of Object.keys(I)) if (typeof I[k] === 'string') for (const [a, b] of cambios) if (b) I[k] = I[k].split(a).join(b);
+  AUTOR = n.nombre;
+}
+let AUTOR = 'Jhonny Castorani';
+
+export function paginas(posts, pags = []) {
+  const PAG = Object.fromEntries(pags.map((e) => [e.id, e]));
+  aplicarAutor(PAG.nosotros?.data);
   const R = {};
   const mapa = [];
   const hoy = new Date().toISOString().slice(0, 10);
@@ -193,6 +264,8 @@ export function paginas(posts) {
     else if (info.tipo === 'seccion') main = seccion(seg[0], posts);
     else if (info.tipo === 'sub') main = subseccion(seg[0], seg[1], posts);
     else if (info.tipo === 'anunciate') main = anunciatePag();
+    else if (ruta === '/nosotros/' && PAG.nosotros) main = nosotrosPag(PAG.nosotros);
+    else if (PAG[seg[0]] && seg.length === 1 && info.tipo === 'legal') main = legalPag(seg[0], PAG[seg[0]]);
     else main = fill(pagina(seg.join('__') || 'home'), { SITE });
     const vacia = info.tipo === 'sub' && !posts.some((p) => p.seccion === seg[0] && p.subseccion === seg[1]) && seg[1] !== 'herramientas';
     const sinIndice = seoDe(ruta)?.noindex || vacia || info.tipo === 'nf';
@@ -200,7 +273,7 @@ export function paginas(posts) {
     const datos = info.tipo === 'home' ? ld({ '@context': 'https://schema.org', '@graph': [{ '@type': 'Organization', name: seo.nombre, url: SITE, logo: `${SITE}/favicon.svg` }, { '@type': 'WebSite', name: seo.nombre, url: SITE, inLanguage: 'es' }] }) : '';
     let cabeza = (sinIndice ? NOINDEX : '') + metaPagina(ruta);
     if (info.tipo === 'nf') cabeza = cabeza.replace(/<link rel="canonical"[^>]*>/, '');
-    add(salida, envolver(info.tipo, cabeza, main, anal(ruta), datos));
+    add(salida, envolver(info.tipo, cabeza, main, anal(ruta), datos, ruta));
     if (!sinIndice) mapa.push({ ruta, fecha: hoy });
   }
   for (const p of posts) {

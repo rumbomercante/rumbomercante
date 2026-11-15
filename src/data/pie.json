@@ -1,0 +1,89 @@
+{
+  "lema": "Recursos, herramientas y conocimiento operativo para el día a día de la gente de mar.",
+  "firma": "Bienvenido a tu guardia diaria. Nos vemos a bordo.",
+  "redes": [],
+  "columnas": [
+    {
+      "titulo": "Secciones",
+      "enlaces": [
+        {
+          "texto": "Recursos",
+          "url": "/recursos/",
+          "externo": false
+        },
+        {
+          "texto": "Guías y Operaciones",
+          "url": "/guias/",
+          "externo": false
+        },
+        {
+          "texto": "Vida a Bordo y Desarrollo Profesional",
+          "url": "/vida-a-bordo/",
+          "externo": false
+        },
+        {
+          "texto": "Actualidad Marítima",
+          "url": "/actualidad/",
+          "externo": false
+        }
+      ]
+    },
+    {
+      "titulo": "Herramientas",
+      "enlaces": [
+        {
+          "texto": "Calculadora de horas de descanso",
+          "url": "/recursos/herramientas/calculadora-descanso/",
+          "externo": false
+        },
+        {
+          "texto": "Conversor de unidades marítimas",
+          "url": "/recursos/herramientas/conversor-unidades/",
+          "externo": false
+        }
+      ]
+    },
+    {
+      "titulo": "Rumbo Mercante",
+      "enlaces": [
+        {
+          "texto": "Nosotros",
+          "url": "/nosotros/",
+          "externo": false
+        },
+        {
+          "texto": "Todas las publicaciones",
+          "url": "/blog/",
+          "externo": false
+        },
+        {
+          "texto": "Anúnciate",
+          "url": "/anunciate/",
+          "externo": false
+        },
+        {
+          "texto": "Contacto",
+          "url": "/contacto/",
+          "externo": false
+        },
+        {
+          "texto": "Política de privacidad",
+          "url": "/politica-de-privacidad/",
+          "externo": false
+        },
+        {
+          "texto": "Términos de uso",
+          "url": "/terminos/",
+          "externo": false
+        },
+        {
+          "texto": "Blog Ingmaritima",
+          "url": "https://ingmaritima.blogspot.com",
+          "externo": true
+        }
+      ]
+    }
+  ],
+  "copyright": "© 2026 Rumbo Mercante. Todos los derechos reservados.",
+  "coordenadas": "10°36′N · 66°56′W — Rumbo fijo, mar abierto"
+}

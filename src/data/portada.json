@@ -1,9 +1,60 @@
 {
-  "destacados": ["checklist-maleta-primer-embarque", "primer-embarque-lo-que-nadie-te-cuenta", "checklist-relevo-guardia-maquinas"],
+  "destacados": [
+    "checklist-maleta-primer-embarque",
+    "primer-embarque-lo-que-nadie-te-cuenta",
+    "checklist-relevo-guardia-maquinas"
+  ],
   "fotoPortada": "",
   "mostrarSecciones": true,
   "mostrarDestacados": true,
   "mostrarUltimas": true,
   "mostrarHerramientas": true,
-  "mostrarAnunciantes": true
+  "mostrarAnunciantes": true,
+  "textos": {
+    "hero": {
+      "etiqueta": "Rumbo Mercante · Cubierta y Máquinas",
+      "titulo": "Recursos, herramientas y conocimiento operativo para el día a día de la",
+      "resaltado": "gente de mar.",
+      "texto": "Plantillas, checklists, guías técnicas desde la experiencia real a bordo. Para el cadete que pisa un buque por primera vez y para el oficial que quiere seguir creciendo profesionalmente.",
+      "boton1": "Explorar secciones",
+      "boton2": "Conoce la historia"
+    },
+    "secciones": {
+      "etiqueta": "Carta de navegación",
+      "titulo": "Cuatro secciones,",
+      "resaltado": "un mismo rumbo",
+      "recursos": "Material operativo listo para usar: plantillas, checklists imprimibles, glosarios de inglés técnico y calculadoras para el trabajo a bordo.",
+      "guias": "Explicaciones claras del funcionamiento real de los sistemas a bordo y de los procedimientos que se aplican en cada guardia.",
+      "vidaABordo": "Lo que no se enseña en la academia: primer embarque, fatiga, convivencia, ascensos y cómo trazar tu carrera por mérito propio.",
+      "actualidad": "Novedades del sector, cambios normativos (OMI, STCW, MARPOL, MLC) y lo que significan en la práctica para la gente de mar."
+    },
+    "destacados": {
+      "etiqueta": "Destacados",
+      "titulo": "Lo más útil para",
+      "resaltado": "empezar",
+      "texto": "Tres lecturas para tu primer embarque y para tu próxima guardia en máquinas.",
+      "boton": "Ver el blog"
+    },
+    "ultimas": {
+      "etiqueta": "Bitácora",
+      "titulo": "Últimas publicaciones",
+      "boton": "Ver todas las publicaciones"
+    },
+    "herramientas": {
+      "etiqueta": "Herramientas",
+      "titulo": "Gratis,",
+      "resaltado": "para usar a bordo",
+      "calcTitulo": "Horas de descanso STCW / MLC",
+      "calcTexto": "Comprueba si tus periodos de descanso cumplen los mínimos de 10 h por día y 77 h por semana.",
+      "convTitulo": "Unidades marítimas",
+      "convTexto": "Millas náuticas, nudos, presión, temperatura y volumen sin salir de la guardia."
+    },
+    "anunciantes": {
+      "etiqueta": "Anunciantes",
+      "titulo": "Empresas que acompañan a la gente de mar",
+      "texto": "Centros capacitación náutica, navieras, academias de ingles marítimo, agencias de tripulación, tiendas de equipamiento y servicios marítimos que apoyan este proyecto.",
+      "boton": "Quiero anunciarme",
+      "frase": "¿Tienes una empresa del sector? Hablemos."
+    }
+  }
 }

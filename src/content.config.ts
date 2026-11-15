@@ -29,4 +29,25 @@ const articulos = defineCollection({
   }),
 });
 
-export const collections = { articulos };
+// Páginas con texto largo editables en el panel: Nosotros y las páginas legales.
+const paginas = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/paginas' }),
+  schema: z.object({
+    titulo: z.string(),
+    etiqueta: z.string().optional(),
+    actualizado: z.coerce.date().optional(),
+    foto: z.string().optional().nullable(),
+    nombre: z.string().optional(),
+    cargo: z.string().optional(),
+    datos: z.array(z.string()).optional(),
+    resumenAutor: z.string().optional(),
+    cierre: z.string().optional(),
+    firma: z.string().optional(),
+    valoresTitulo: z.string().optional(),
+    valores: z.array(z.object({ titulo: z.string(), texto: z.string() })).optional(),
+    ctaTitulo: z.string().optional(),
+    ctaBoton: z.string().optional(),
+  }),
+});
+
+export const collections = { articulos, paginas };
