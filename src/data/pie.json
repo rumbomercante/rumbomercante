@@ -75,11 +75,6 @@
           "texto": "Términos de uso",
           "url": "/terminos/",
           "externo": false
-        },
-        {
-          "texto": "Blog Ingmaritima",
-          "url": "https://ingmaritima.blogspot.com",
-          "externo": true
         }
       ]
     }
