@@ -16,6 +16,7 @@
       "texto": "Equipamiento de trabajo, EPI, uniformes, seguros, servicios técnicos, conectividad y todo lo que la gente de mar necesita."
     }
   ],
+  "planes": [],
   "pasos": [
     {
       "titulo": "Escríbenos",
@@ -31,9 +32,9 @@
     }
   ],
   "nota": "Solo se aceptan anunciantes relacionados con el sector marítimo y que aporten valor a la gente de mar. Los espacios gratuitos del lanzamiento son limitados; más adelante se ofrecerán planes de pago.",
-  "ctaTitulo": "Contáctanos y descubre el procedimiento para anunciarse!!",
+  "ctaTitulo": "Contáctanos y descubre el procedimiento para anunciarte!!",
   "ctaBoton": "Solicitar un espacio",
   "promoVisible": true,
   "promoTitulo": "Anúnciate gratis",
-  "promoTexto": "Por tiempo limitado los espacios para anunciantes no tienen coste."
+  "promoTexto": "Por tiempo limitado los espacios para anunciantes no tienen ningún costo."
 }
