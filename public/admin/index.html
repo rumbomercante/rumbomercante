@@ -7,15 +7,69 @@
   <meta name="robots" content="noindex, nofollow">
   <meta name="referrer" content="no-referrer">
   <!-- Reglas de seguridad: el panel solo carga código de esta web y solo habla con GitHub.
-       En la web real van además como cabeceras (vercel.json), que también impiden incrustar el panel en otra página. -->
+       En la web publicada van además como cabeceras (vercel.json), que también impiden incrustar el panel en otra página. -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://avatars.githubusercontent.com https://raw.githubusercontent.com; font-src 'self' data: https://cdn.jsdelivr.net/fontsource/fonts/; connect-src 'self' data: https://api.github.com https://raw.githubusercontent.com https://unpkg.com/@sveltia/cms@0.266.0/locales/ https://www.githubstatus.com/api/; worker-src 'self' blob:; manifest-src 'self' blob:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'">
-  <title>Panel de Rumbo Mercante</title>
+  <title>Panel · Rumbo Mercante</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/_astro/fonts.css?v=20261108">
   <link href="/admin/config.yml" type="application/yaml" rel="cms-config-url">
+  <style>
+    /* Colores de Rumbo Mercante aplicados al panel (Sveltia CMS) */
+    :root:root { --sui-base-hue: 36; }
+    #acceso {
+      position: fixed; inset: 0; z-index: 10; display: none; place-items: center; padding: 1.5rem;
+      background: radial-gradient(ellipse at 20% 0%, #1e4f7a, transparent 60%), #061a2d;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: #142133;
+    }
+    #acceso.visible { display: grid; }
+    #acceso * { box-sizing: border-box; }
+    #acceso .caja {
+      width: 100%; max-width: 380px; padding: 2.2rem 1.9rem; border-radius: 18px;
+      background: #f7f3ea; box-shadow: 0 24px 60px rgba(0, 0, 0, .4);
+    }
+    #acceso .marca { display: flex; align-items: center; gap: .7rem; margin-bottom: 1.6rem; }
+    #acceso .marca img { width: 44px; height: 44px; }
+    #acceso .marca b { font-family: Fraunces, Georgia, serif; font-size: 1.4rem; font-weight: 600; color: #061a2d; }
+    #acceso .marca i { color: #9c7426; }
+    #acceso h1 { font-size: 1.15rem; margin: 0 0 .3rem; color: #061a2d; }
+    #acceso .sub { margin: 0 0 1.4rem; color: #5b6b80; font-size: .92rem; }
+    #acceso label { display: block; font-size: .85rem; font-weight: 600; margin: 0 0 .35rem; color: #0b2640; }
+    #acceso input {
+      width: 100%; font: inherit; font-size: 1rem; padding: .8rem .9rem; margin-bottom: 1rem;
+      border: 1px solid #e2dccd; border-radius: 10px; background: #fff;
+    }
+    #acceso input:focus { outline: none; border-color: #1e4f7a; box-shadow: 0 0 0 3px rgba(30, 79, 122, .18); }
+    #acceso button {
+      width: 100%; font: inherit; font-weight: 600; font-size: 1rem; padding: .9rem; margin-top: .3rem;
+      border: 0; border-radius: 999px; background: #f0c27a; color: #061a2d; cursor: pointer;
+    }
+    #acceso button:hover { background: #f5d39b; }
+    #acceso button:disabled { opacity: .6; cursor: wait; }
+    #acceso .error {
+      display: none; margin: 0 0 1rem; padding: .7rem .9rem; border-radius: 10px;
+      background: #fbf0ea; border: 1px solid #f0d2c4; color: #8a3520; font-size: .9rem;
+    }
+    #acceso .error.visible { display: block; }
+    #acceso .volver { display: block; margin-top: 1.1rem; text-align: center; color: #1e4f7a; font-size: .9rem; text-decoration: none; }
+    #acceso .volver:hover { text-decoration: underline; }
+  </style>
 </head>
 <body>
-  <!-- Programa del panel guardado en la propia web, en una versión fija (0.266.0).
-       La huella (integrity) hace que el navegador lo rechace si alguien lo modifica. -->
-  <script src="/admin/sveltia-cms-0.266.0.js"
-          integrity="sha384-MvIc9V6dpnf1+8gMj6610BmYWClYbpAyg810CA5ad7jCJmLlpGsOZTJOpOewp0wn"></script>
+  <div id="acceso" role="dialog" aria-labelledby="titulo-acceso">
+    <form class="caja" id="form-acceso">
+      <div class="marca"><img src="/favicon.svg" alt=""><b>Rumbo <i>Mercante</i></b></div>
+      <h1 id="titulo-acceso">Panel de administración</h1>
+      <p class="sub">Entra para editar la web.</p>
+      <p class="error" id="error" role="alert"></p>
+      <label for="usuario">Usuario</label>
+      <input id="usuario" name="usuario" autocomplete="username" autocapitalize="none" spellcheck="false" required>
+      <label for="clave">Contraseña</label>
+      <input id="clave" name="clave" type="password" autocomplete="current-password" required>
+      <button type="submit" id="entrar">Entrar</button>
+      <a class="volver" href="/">← Volver a la web</a>
+    </form>
+  </div>
+  <!-- Pantalla de acceso. Al entrar, carga el panel guardado en esta web (versión fija y con huella). -->
+  <script src="/admin/acceso.js"></script>
 </body>
 </html>

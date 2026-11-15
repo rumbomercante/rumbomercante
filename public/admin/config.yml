@@ -4,6 +4,8 @@ backend:
   name: github
   repo: rumbomercante/rumbomercante
   branch: main
+  # La entrada con usuario y contraseña la hace /admin/acceso.js (con /api/auth en Vercel).
+  # Si alguna vez apareciera la pantalla propia de Sveltia, solo ofrece entrar con token.
   auth_methods: [token]
   commit_messages:
     create: "Crear {{collection}} «{{slug}}» (desde el panel)"

@@ -28,8 +28,14 @@ for (const f of readdirSync('src/data').filter((f) => f.endsWith('.json'))) leer
 
 // 3) El panel debe seguir protegido
 const admin = readFileSync('public/admin/index.html', 'utf8');
-if (!/integrity="sha384-/.test(admin) || !/Content-Security-Policy/.test(admin))
-  errores.push('public/admin/index.html: falta la huella o las reglas de seguridad');
+if (!/Content-Security-Policy/.test(admin)) errores.push('public/admin/index.html: faltan las reglas de seguridad');
+const acceso = readFileSync('public/admin/acceso.js', 'utf8');
+const js = acceso.match(/PANEL_JS = '\/admin\/([^']+)'/)?.[1];
+if (!/PANEL_HUELLA = 'sha384-/.test(acceso) || !js) errores.push('public/admin/acceso.js: falta la huella del panel');
+else {
+  try { readFileSync(`public/admin/${js}`); }
+  catch { errores.push(`public/admin/${js}: no existe el programa del panel`); }
+}
 
 if (errores.length) {
   console.error('\n✖ Revisión fallida. No se publica nada:\n  - ' + errores.join('\n  - ') + '\n');
