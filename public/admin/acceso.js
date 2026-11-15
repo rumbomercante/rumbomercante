@@ -75,9 +75,17 @@
     if (iniciado) return;
     iniciado = true;
     acceso.classList.remove('visible');
+    // Arranque manual: primero se registran los bloques del editor y después se inicia el panel.
+    window.CMS_MANUAL_INIT = true;
     const s = document.createElement('script');
     s.src = PANEL_JS;
     s.integrity = PANEL_HUELLA;
+    s.onload = () => {
+      const b = document.createElement('script');
+      b.src = '/admin/bloques.js';
+      b.onload = b.onerror = () => window.CMS && window.CMS.init();
+      document.body.appendChild(b);
+    };
     document.body.appendChild(s);
     setTimeout(mostrarDiagnostico, 25000);
     // Al cerrar sesión en el panel se borra la sesión: se vuelve a la pantalla de acceso.

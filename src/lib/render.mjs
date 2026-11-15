@@ -26,9 +26,14 @@ const HERRAMIENTAS = [
 ];
 const subDe = (sec, sub) => SECS[sec].subs.find((s) => s.key === sub) ?? { key: sub, nombre: sub };
 
+// Fecha de hoy en Venezuela (UTC−4): los artículos con fecha futura quedan programados y no se publican
+// hasta ese día (la web se reconstruye sola cada noche, ver api/publicar-programados.js).
+const HOY_VE = new Date(Date.now() - 4 * 3600e3).toISOString().slice(0, 10);
+
 export function preparar(entradas) {
   return entradas
     .filter((e) => e.data.publicado !== false)
+    .filter((e) => e.data.fecha.toISOString().slice(0, 10) <= HOY_VE)
     .map((e) => {
       const d = e.data;
       const [seccion, subseccion] = d.categoria.split('/');

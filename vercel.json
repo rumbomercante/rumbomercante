@@ -53,5 +53,11 @@
         }
       ]
     }
+  ],
+  "crons": [
+    {
+      "path": "/api/publicar-programados",
+      "schedule": "5 4 * * *"
+    }
   ]
 }
