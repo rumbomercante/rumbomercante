@@ -1,25 +1,29 @@
 ---
-titulo: "¿Cubierta o máquinas? Cómo elegir tu especialidad en la marina mercante"
-descripcion: "Las diferencias reales entre el departamento de cubierta y el de máquinas: trabajo diario, guardias, perfil personal, salidas profesionales y preguntas para decidir con criterio."
+titulo: ¿Cubierta o máquinas? Cómo elegir tu especialidad en la marina mercante
+descripcion: 'Las diferencias reales entre el departamento de cubierta y el de máquinas: trabajo diario, guardias, perfil personal, salidas profesionales y preguntas para decidir con criterio.'
 fecha: 2026-10-22
 publicado: true
 categoria: guias/formacion
-tipo: "Guía"
-imagen: "/img/articulos/cubierta-maquinas.jpg"
-imagenAlt: "Lámina: sección de un buque con dos rumbos, hacia cubierta o hacia máquinas"
-imagenAncho: 1600
-imagenAlto: 900
+tipo: Guía
+imagen: /img/articulos/cubierta-maquinas.jpg
+imagenAlt: 'Lámina: sección de un buque con dos rumbos, hacia cubierta o hacia máquinas'
 minutos: 2
-etiquetas: ["estudiantes","cubierta","máquinas","carrera"]
+etiquetas:
+  - estudiantes
+  - cubierta
+  - máquinas
+  - carrera
 imprimible: false
-descargaUrl: ""
-descargaTexto: ""
+descargaUrl: ''
+descargaTexto: ''
 seo:
-  titulo: ""
-  descripcion: ""
-  imagen: ""
-  palabraClave: ""
+  titulo: ''
+  descripcion: ''
+  imagen: ''
+  palabraClave: ''
   noindex: false
+imagenAlto: 900
+imagenAncho: 1600
 ---
 
 Es la primera gran decisión de cualquier marino, y muchas veces se toma sin información. Yo mismo elegí sin saber bien qué implicaba cada camino. Con los años he visto compañeros felices en su elección y otros que se cambiaron a mitad de carrera. Esta guía resume lo que me habría gustado saber antes de decidir.
@@ -38,7 +42,7 @@ Es la primera gran decisión de cualquier marino, y muchas veces se toma sin inf
 | Ambiente | Vista al exterior, intemperie | Calor, ruido, espacios cerrados |
 | Tareas típicas | Navegación, vigilancia, carga, documentación | Operación, mantenimiento, averías, registros |
 | Habilidades clave | Toma de decisiones, comunicación, normativa | Mecánica, electricidad, diagnóstico, trabajo manual |
-| Guardias | Guardias de puente (normalmente 4 h / 8 h) | Guardias o régimen de cámara desatendida (UMS) |
+| Guardias | Guardias de puente (normalmente 4 h / 8 h) | Guardias o régimen de cámara desatendida (UMS) o en caso de ser Máquina atendida ( guardias de 4h / 8h ) |
 
 ## ¿Qué perfil encaja en cada uno?
 
