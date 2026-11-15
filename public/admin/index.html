@@ -14,8 +14,32 @@
   <link rel="stylesheet" href="/_astro/fonts.css?v=20261108">
   <link href="/admin/config.yml" type="application/yaml" rel="cms-config-url">
   <style>
-    /* Colores de Rumbo Mercante aplicados al panel (Sveltia CMS) */
-    :root:root { --sui-base-hue: 36; }
+    /* Colores y letra de Rumbo Mercante aplicados al panel (Sveltia CMS):
+       fondos con tono azul marino y acentos dorados (#f0c27a), igual que la web. */
+    :root:root:root, :root:root:root[data-theme] {
+      --sui-base-hue: 210;
+      --sui-font-family-default: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+      --sui-control-font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+      --sui-heading-font-family: Fraunces, Georgia, serif;
+      --sui-primary-accent-color: #c9973f;
+      --sui-primary-accent-color-light: #e0ad55;
+      --sui-primary-accent-color-dark: #a87b2c;
+      --sui-primary-accent-color-inverted: #061a2d;
+      --sui-primary-accent-color-text: #7d5a14;
+      --sui-primary-accent-color-translucent: rgba(201, 151, 63, .25);
+      --sui-primary-accent-color-translucent-light: rgba(201, 151, 63, .12);
+    }
+    :root:root:root[data-theme="dark"] {
+      --sui-background-color-1-hsl: 210 62% 7%;
+      --sui-background-color-2-hsl: 210 60% 9%;
+      --sui-background-color-3-hsl: 210 52% 12%;
+      --sui-background-color-4-hsl: 210 44% 16%;
+      --sui-background-color-5-hsl: 210 30% 30%;
+      --sui-primary-accent-color: #e0ad55;
+      --sui-primary-accent-color-light: #f0c27a;
+      --sui-primary-accent-color-dark: #c9973f;
+      --sui-primary-accent-color-text: #f0c27a;
+    }
     #acceso {
       position: fixed; inset: 0; z-index: 10; display: none; place-items: center; padding: 1.5rem;
       background: radial-gradient(ellipse at 20% 0%, #1e4f7a, transparent 60%), #061a2d;

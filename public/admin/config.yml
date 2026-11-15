@@ -17,6 +17,10 @@ backend:
 site_url: https://rumbomercante.vercel.app
 display_url: https://rumbomercante.vercel.app
 locale: es
+app_title: Panel de Rumbo Mercante
+logo:
+  src: /favicon.svg
+  show_in_header: true
 media_folder: /public/img
 public_folder: /img
 
@@ -25,6 +29,8 @@ collections:
   - name: articulos
     label: Entradas del blog
     label_singular: entrada
+    icon: article
+    description: Crea, edita o despublica los artículos. Cada guardado se publica en la web en 1-2 minutos.
     folder: src/content/articulos
     extension: md
     format: frontmatter
@@ -82,9 +88,14 @@ collections:
           - { name: noindex, label: Ocultar de Google, widget: boolean, default: false, required: false }
       - { name: body, label: Contenido, widget: markdown }
 
-  # ---------------- Ajustes del sitio ----------------
+  - divider: true
+
+  # ---------------- Portada y anunciantes ----------------
   - name: ajustes
-    label: Ajustes del sitio
+    label: Portada y anunciantes
+    icon: storefront
+    description: Qué se muestra en la portada, las tarjetas de anunciantes y la página Anúnciate.
+    editor: { preview: false }
     files:
       - name: anunciantes
         label: Anunciantes
@@ -163,6 +174,13 @@ collections:
           - { name: mostrarHerramientas, label: Mostrar Herramientas, widget: boolean, default: true, required: false }
           - { name: mostrarAnunciantes, label: Mostrar Anunciantes, widget: boolean, default: true, required: false }
 
+  # ---------------- Apariencia y SEO ----------------
+  - name: apariencia-seo
+    label: Apariencia y SEO
+    icon: palette
+    description: Colores de la web, datos generales, textos para Google y redirecciones de direcciones antiguas.
+    editor: { preview: false }
+    files:
       - name: apariencia
         label: Apariencia
         file: src/data/apariencia.json
