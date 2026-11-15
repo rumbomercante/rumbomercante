@@ -34,8 +34,11 @@
   const errorOriginal = console.error.bind(console);
   console.error = (...a) => { anotar(a.map((x) => x?.message || (typeof x === 'object' ? JSON.stringify(x) : x)).join(' ')); errorOriginal(...a); };
   const fetchOriginal = window.fetch.bind(window);
+  const peticiones = { total: 0, github: 0, ultima: '' };
   window.fetch = async (...a) => {
     const url = String(a[0]?.url || a[0]).split('?')[0];
+    peticiones.total++;
+    if (/github/.test(url)) { peticiones.github++; peticiones.ultima = url.replace('https://api.github.com', ''); }
     try {
       const r = await fetchOriginal(...a);
       if (!r.ok && /github/.test(url)) anotar(`GitHub respondió ${r.status} en ${url.replace('https://api.github.com', '')}`);
@@ -49,7 +52,7 @@
     if (!/Cargando|Loading/i.test(document.body.innerText)) return;
     const caja = document.createElement('div');
     caja.style.cssText = 'position:fixed;right:12px;bottom:12px;z-index:99999;max-width:560px;max-height:60vh;overflow:auto;padding:12px 14px;border-radius:10px;background:#0b2640;color:#fff;font:12px/1.5 system-ui,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.35);white-space:pre-wrap';
-    caja.textContent = 'Diagnóstico del panel (haz una captura y envíala):\n' + (errores.length ? errores.map((e) => '• ' + e).join('\n') : '• Sin errores registrados todavía.') + '\nNavegador: ' + navigator.userAgent.slice(0, 120);
+    caja.textContent = 'Diagnóstico del panel (haz una captura y envíala):\n' + (errores.length ? errores.map((e) => '• ' + e).join('\n') : '• Sin errores registrados todavía.') + '\nPeticiones: ' + peticiones.total + ' (a GitHub: ' + peticiones.github + ', última: ' + (peticiones.ultima || 'ninguna') + ')\nAlmacén del navegador: ' + (window.indexedDB ? 'disponible' : 'NO disponible') + '\nNavegador: ' + navigator.userAgent.slice(0, 120);
     document.body.appendChild(caja);
   };
 
