@@ -25,6 +25,34 @@
     caja.textContent = 'Bloqueado por seguridad (envía una captura): ' + [...bloqueados].join(' · ');
   });
 
+  // Diagnóstico visible: si el panel tarda en cargar, muestra los errores internos (sin claves).
+  const errores = [];
+  const limpiar = (t) => String(t).replace(/(github_pat_|ghp_|gho_|ghu_)[A-Za-z0-9_]+/g, '[clave oculta]').slice(0, 220);
+  const anotar = (t) => { if (errores.length < 12) errores.push(limpiar(t)); };
+  window.addEventListener('error', (e) => anotar('Error: ' + (e.message || e.filename || '')));
+  window.addEventListener('unhandledrejection', (e) => anotar('Error: ' + (e.reason?.message || e.reason)));
+  const errorOriginal = console.error.bind(console);
+  console.error = (...a) => { anotar(a.map((x) => x?.message || (typeof x === 'object' ? JSON.stringify(x) : x)).join(' ')); errorOriginal(...a); };
+  const fetchOriginal = window.fetch.bind(window);
+  window.fetch = async (...a) => {
+    const url = String(a[0]?.url || a[0]).split('?')[0];
+    try {
+      const r = await fetchOriginal(...a);
+      if (!r.ok && /github/.test(url)) anotar(`GitHub respondió ${r.status} en ${url.replace('https://api.github.com', '')}`);
+      return r;
+    } catch (err) {
+      if (!url.includes('package.json')) anotar(`Sin conexión con ${url}: ${err.message}`);
+      throw err;
+    }
+  };
+  const mostrarDiagnostico = () => {
+    if (!/Cargando|Loading/i.test(document.body.innerText)) return;
+    const caja = document.createElement('div');
+    caja.style.cssText = 'position:fixed;right:12px;bottom:12px;z-index:99999;max-width:560px;max-height:60vh;overflow:auto;padding:12px 14px;border-radius:10px;background:#0b2640;color:#fff;font:12px/1.5 system-ui,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.35);white-space:pre-wrap';
+    caja.textContent = 'Diagnóstico del panel (haz una captura y envíala):\n' + (errores.length ? errores.map((e) => '• ' + e).join('\n') : '• Sin errores registrados todavía.') + '\nNavegador: ' + navigator.userAgent.slice(0, 120);
+    document.body.appendChild(caja);
+  };
+
   const acceso = document.getElementById('acceso');
   const form = document.getElementById('form-acceso');
   const error = document.getElementById('error');
@@ -48,6 +76,7 @@
     s.src = PANEL_JS;
     s.integrity = PANEL_HUELLA;
     document.body.appendChild(s);
+    setTimeout(mostrarDiagnostico, 25000);
     // Al cerrar sesión en el panel se borra la sesión: se vuelve a la pantalla de acceso.
     setInterval(() => {
       if (!sesionGuardada()) location.reload();
