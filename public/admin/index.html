@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Que Google no indexe el panel -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <!-- Reglas de seguridad: el panel solo carga código de esta web y solo habla con GitHub.
+       En la web real van además como cabeceras (vercel.json), que también impiden incrustar el panel en otra página. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://avatars.githubusercontent.com https://raw.githubusercontent.com; font-src 'self' data: https://cdn.jsdelivr.net/fontsource/fonts/; connect-src 'self' data: https://api.github.com https://raw.githubusercontent.com https://unpkg.com/@sveltia/cms@0.266.0/locales/ https://www.githubstatus.com/api/; worker-src 'self' blob:; manifest-src 'self' blob:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <title>Panel de Rumbo Mercante</title>
+  <link href="/admin/config.yml" type="application/yaml" rel="cms-config-url">
+</head>
+<body>
+  <!-- Programa del panel guardado en la propia web, en una versión fija (0.266.0).
+       La huella (integrity) hace que el navegador lo rechace si alguien lo modifica. -->
+  <script src="/admin/sveltia-cms-0.266.0.js"
+          integrity="sha384-MvIc9V6dpnf1+8gMj6610BmYWClYbpAyg810CA5ad7jCJmLlpGsOZTJOpOewp0wn"></script>
+</body>
+</html>

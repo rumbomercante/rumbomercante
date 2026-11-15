@@ -1,0 +1,228 @@
+# Panel de Rumbo Mercante (Sveltia CMS)
+# Se entra solo con una clave de GitHub limitada a este repositorio.
+backend:
+  name: github
+  repo: rumbomercante/rumbomercante
+  branch: main
+  auth_methods: [token]
+  commit_messages:
+    create: "Crear {{collection}} «{{slug}}» (desde el panel)"
+    update: "Editar {{collection}} «{{slug}}» (desde el panel)"
+    delete: "Borrar {{collection}} «{{slug}}» (desde el panel)"
+    uploadMedia: "Subir imagen «{{path}}» (desde el panel)"
+    deleteMedia: "Borrar imagen «{{path}}» (desde el panel)"
+
+site_url: https://rumbomercante.vercel.app
+display_url: https://rumbomercante.vercel.app
+locale: es
+media_folder: /public/img
+public_folder: /img
+
+collections:
+  # ---------------- Artículos ----------------
+  - name: articulos
+    label: Entradas del blog
+    label_singular: entrada
+    folder: src/content/articulos
+    extension: md
+    format: frontmatter
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    identifier_field: titulo
+    summary: "{{titulo}}"
+    sortable_fields: [fecha, titulo]
+    view_groups:
+      - { label: Sección, field: categoria }
+    media_folder: /public/img/articulos
+    public_folder: /img/articulos
+    fields:
+      - { name: titulo, label: Título, widget: string }
+      - { name: descripcion, label: Resumen, widget: text, hint: "Aparece debajo del título y en las tarjetas." }
+      - { name: fecha, label: Fecha de publicación, widget: datetime, type: date, input_timezone: utc }
+      - { name: publicado, label: Publicado, widget: boolean, default: true, hint: "Desactívalo para guardar como borrador sin mostrarlo en la web." }
+      - name: categoria
+        label: Sección
+        widget: select
+        hint: "Forma parte de la dirección de la página. Si la cambias en un artículo ya publicado, agrega una redirección."
+        options:
+          - { value: recursos/plantillas, label: "Recursos › Plantillas" }
+          - { value: recursos/checklists, label: "Recursos › Checklists" }
+          - { value: recursos/ingles-maritimo, label: "Recursos › Inglés marítimo" }
+          - { value: guias/sala-de-maquinas, label: "Guías › Sala de máquinas" }
+          - { value: guias/cubierta, label: "Guías › Cubierta y navegación" }
+          - { value: guias/seguridad, label: "Guías › Seguridad" }
+          - { value: guias/formacion, label: "Guías › Formación y estudios" }
+          - { value: vida-a-bordo/primer-embarque, label: "Vida a Bordo › Primer embarque" }
+          - { value: vida-a-bordo/bienestar, label: "Vida a Bordo › Bienestar y fatiga" }
+          - { value: vida-a-bordo/carrera-profesional, label: "Vida a Bordo › Carrera profesional" }
+          - { value: actualidad/normativa, label: "Actualidad › Normativa" }
+          - { value: actualidad/industria, label: "Actualidad › Industria" }
+          - { value: actualidad/novedades, label: "Actualidad › Novedades del sitio" }
+      - { name: tipo, label: Tipo de contenido, widget: select, hint: "Es la etiqueta que aparece sobre la imagen.", options: [Guía, Artículo, Checklist, Glosario, Plantilla, Noticia] }
+      - { name: imagen, label: Imagen principal, widget: image }
+      - { name: imagenAlt, label: Descripción de la imagen, widget: string, required: false, hint: "Para buscadores y personas que no pueden ver la imagen." }
+      - { name: minutos, label: Minutos de lectura, widget: number, value_type: int, required: false, hint: "Déjalo vacío para calcularlo automáticamente." }
+      - { name: etiquetas, label: Etiquetas, widget: list, required: false }
+      - { name: imprimible, label: Mostrar botón de imprimir, widget: boolean, default: false, required: false }
+      - { name: descargaUrl, label: Archivo descargable (dirección), widget: string, required: false, hint: "Por ejemplo /descargas/archivo.csv. Déjalo vacío si no hay descarga." }
+      - { name: descargaTexto, label: Texto del botón de descarga, widget: string, required: false }
+      - name: seo
+        label: SEO de este artículo
+        widget: object
+        collapsed: true
+        required: false
+        fields:
+          - { name: titulo, label: Título para Google, widget: string, required: false, hint: "Ideal: hasta 60 caracteres. Vacío usa el título del artículo." }
+          - { name: descripcion, label: Descripción para Google, widget: text, required: false, hint: "Ideal: entre 120 y 160 caracteres. Vacío usa el resumen." }
+          - { name: imagen, label: Imagen para redes sociales, widget: image, required: false, media_folder: /public/og/articulos, public_folder: /og/articulos }
+          - { name: palabraClave, label: Palabra clave objetivo, widget: string, required: false, hint: "Nota interna para orientar el artículo; no se publica." }
+          - { name: noindex, label: Ocultar de Google, widget: boolean, default: false, required: false }
+      - { name: body, label: Contenido, widget: markdown }
+
+  # ---------------- Ajustes del sitio ----------------
+  - name: ajustes
+    label: Ajustes del sitio
+    files:
+      - name: anunciantes
+        label: Anunciantes
+        file: src/data/anunciantes.json
+        format: json
+        fields:
+          - name: anunciantes
+            label: Tarjetas de la portada
+            widget: list
+            collapsed: true
+            summary: "{{nombre}}"
+            fields:
+              - { name: nombre, label: Nombre, widget: string }
+              - { name: etiqueta, label: Categoría (línea superior), widget: string, required: false }
+              - { name: frase, label: Frase, widget: text, required: false }
+              - { name: logo, label: Logo, widget: image, required: false, media_folder: /public/img/anunciantes, public_folder: /img/anunciantes }
+              - { name: alt, label: Descripción del logo, widget: string, required: false }
+              - { name: formato, label: Forma del logo, widget: select, required: false, options: [{ value: wide, label: Ancho }, { value: square, label: Cuadrado }] }
+              - { name: url, label: Enlace, widget: string }
+              - { name: hueco, label: Tarjeta de "Coloca tu marca aquí", widget: boolean, default: false, required: false, hint: "Actívalo para mostrar un espacio libre en vez de un anunciante." }
+
+      - name: anunciate
+        label: Página Anúnciate
+        file: src/data/anunciate.json
+        format: json
+        fields:
+          - { name: titulo, label: Título, widget: string }
+          - { name: introduccion, label: Introducción, widget: text, required: false }
+          - { name: textoGratis, label: Texto de la pastilla superior, widget: string, required: false }
+          - name: modalidades
+            label: Modalidades (¿a quién va dirigido?)
+            widget: list
+            collapsed: true
+            required: false
+            summary: "{{titulo}}"
+            fields:
+              - { name: titulo, label: Título, widget: string }
+              - { name: texto, label: Texto, widget: text, required: false }
+          - name: planes
+            label: Planes (opcional)
+            hint: "Si agregas planes, aparece una sección nueva en la página."
+            widget: list
+            collapsed: true
+            required: false
+            summary: "{{nombre}}"
+            fields:
+              - { name: nombre, label: Nombre del plan, widget: string }
+              - { name: precio, label: Precio, widget: string, required: false }
+              - { name: descripcion, label: Qué incluye, widget: text, required: false }
+          - name: pasos
+            label: Cómo funciona
+            widget: list
+            collapsed: true
+            required: false
+            summary: "{{titulo}}"
+            fields:
+              - { name: titulo, label: Título, widget: string }
+              - { name: texto, label: Texto, widget: text, required: false }
+          - { name: nota, label: Nota final, widget: text, required: false }
+          - { name: ctaTitulo, label: Título de la franja final, widget: string, required: false }
+          - { name: ctaBoton, label: Texto del botón final, widget: string, required: false }
+          - { name: promoVisible, label: Mostrar aviso en la portada, widget: boolean, default: true, required: false }
+          - { name: promoTitulo, label: Título del aviso en la portada, widget: string, required: false }
+          - { name: promoTexto, label: Texto del aviso en la portada, widget: text, required: false }
+
+      - name: portada
+        label: Portada
+        file: src/data/portada.json
+        format: json
+        fields:
+          - { name: destacados, label: Artículos destacados, widget: relation, collection: articulos, value_field: "{{slug}}", search_fields: [titulo], display_fields: [titulo], multiple: true, max: 3, required: false }
+          - { name: fotoPortada, label: Foto de portada, widget: image, required: false, hint: "Déjala vacía para usar la foto actual." }
+          - { name: mostrarSecciones, label: "Mostrar «Cuatro secciones»", widget: boolean, default: true, required: false }
+          - { name: mostrarDestacados, label: Mostrar Destacados, widget: boolean, default: true, required: false }
+          - { name: mostrarUltimas, label: Mostrar Últimas publicaciones, widget: boolean, default: true, required: false }
+          - { name: mostrarHerramientas, label: Mostrar Herramientas, widget: boolean, default: true, required: false }
+          - { name: mostrarAnunciantes, label: Mostrar Anunciantes, widget: boolean, default: true, required: false }
+
+      - name: apariencia
+        label: Apariencia
+        file: src/data/apariencia.json
+        format: json
+        fields:
+          - name: acento
+            label: Color de acento
+            widget: select
+            options:
+              - { value: dorado, label: Dorado (actual) }
+              - { value: cobre, label: Cobre }
+              - { value: turquesa, label: Turquesa }
+              - { value: plata, label: Plata }
+          - name: translucidez
+            label: Translucidez de las tarjetas azules
+            widget: select
+            options:
+              - { value: actual, label: Actual }
+              - { value: mas, label: Más translúcidas }
+              - { value: menos, label: Más sólidas }
+
+      - name: seo
+        label: SEO general
+        file: src/data/seo.json
+        format: json
+        fields:
+          - { name: url, label: Dirección del sitio, widget: string, hint: "Cámbiala cuando tengas el dominio. Sin barra al final." }
+          - { name: nombre, label: Nombre del sitio, widget: string }
+          - { name: correoContacto, label: Correo de contacto, widget: string }
+          - { name: verificacionGoogle, label: Código de Google Search Console, widget: string, required: false }
+          - { name: verificacionBing, label: Código de Bing, widget: string, required: false }
+
+      - name: paginas
+        label: SEO de cada página
+        file: src/data/paginas.json
+        format: json
+        fields:
+          - name: paginas
+            label: Páginas
+            widget: list
+            collapsed: true
+            allow_add: false
+            allow_remove: false
+            allow_reorder: false
+            summary: "{{ruta}}"
+            fields:
+              - { name: ruta, label: Página, widget: string, readonly: true }
+              - { name: titulo, label: Título para Google, widget: string, required: false }
+              - { name: descripcion, label: Descripción para Google, widget: text, required: false }
+              - { name: noindex, label: Ocultar de Google, widget: boolean, default: false, required: false }
+
+      - name: redirecciones
+        label: Redirecciones
+        file: vercel.json
+        format: json
+        fields:
+          - name: redirects
+            label: Direcciones que se envían a otra
+            widget: list
+            collapsed: true
+            summary: "{{source}} → {{destination}}"
+            fields:
+              - { name: source, label: Dirección antigua, widget: string }
+              - { name: destination, label: Dirección nueva, widget: string }
+              - { name: permanent, label: Permanente, widget: boolean, default: true }

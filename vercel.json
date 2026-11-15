@@ -1,13 +1,56 @@
 {
+  "framework": "astro",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "redirects": [
-    { "source": "/publicaciones", "destination": "/blog/", "permanent": true },
-    { "source": "/publicaciones/", "destination": "/blog/", "permanent": true }
+    {
+      "source": "/publicaciones",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/publicaciones/",
+      "destination": "/blog/",
+      "permanent": true
+    }
   ],
   "headers": [
     {
       "source": "/_astro/fonts/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/admin/(.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://avatars.githubusercontent.com https://raw.githubusercontent.com; font-src 'self' data: https://cdn.jsdelivr.net/fontsource/fonts/; connect-src 'self' data: https://api.github.com https://raw.githubusercontent.com https://unpkg.com/@sveltia/cms@0.266.0/locales/ https://www.githubstatus.com/api/; worker-src 'self' blob:; manifest-src 'self' blob:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
+        }
       ]
     }
   ]

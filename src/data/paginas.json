@@ -1,0 +1,166 @@
+{
+  "paginas": [
+    {
+      "ruta": "/",
+      "titulo": "Rumbo Mercante | Recursos para la gente de mar",
+      "descripcion": "Plantillas, checklists, guías técnicas, inglés marítimo y experiencia real a bordo para cadetes, pasantes y oficiales de la marina mercante.",
+      "noindex": false
+    },
+    {
+      "ruta": "/actualidad/",
+      "titulo": "Actualidad Marítima | Rumbo Mercante",
+      "descripcion": "Novedades del sector, cambios normativos (OMI, STCW, MARPOL, MLC) y lo que significan en la práctica para la gente de mar.",
+      "noindex": false
+    },
+    {
+      "ruta": "/actualidad/industria/",
+      "titulo": "Industria · Actualidad | Rumbo Mercante",
+      "descripcion": "Tendencias del sector, combustibles, tecnología y empleo.",
+      "noindex": false
+    },
+    {
+      "ruta": "/actualidad/normativa/",
+      "titulo": "Normativa · Actualidad | Rumbo Mercante",
+      "descripcion": "OMI, STCW, MARPOL, SOLAS y MLC explicados en la práctica.",
+      "noindex": false
+    },
+    {
+      "ruta": "/actualidad/novedades/",
+      "titulo": "Novedades del sitio · Actualidad | Rumbo Mercante",
+      "descripcion": "Nuevos recursos, anuncios y novedades de Rumbo Mercante.",
+      "noindex": false
+    },
+    {
+      "ruta": "/anunciate/",
+      "titulo": "Anúnciate | Rumbo Mercante",
+      "descripcion": "Da a conocer tu empresa a estudiantes, cadetes y oficiales de la marina mercante. Espacios gratuitos durante el lanzamiento.",
+      "noindex": false
+    },
+    {
+      "ruta": "/blog/",
+      "titulo": "Blog | Rumbo Mercante",
+      "descripcion": "Todas las guías, recursos, artículos y novedades de Rumbo Mercante.",
+      "noindex": false
+    },
+    {
+      "ruta": "/contacto/",
+      "titulo": "Contacto | Rumbo Mercante",
+      "descripcion": "Envía sugerencias, consultas o solicitudes de plantillas específicas a Rumbo Mercante.",
+      "noindex": false
+    },
+    {
+      "ruta": "/guias/",
+      "titulo": "Guías y Operaciones | Rumbo Mercante",
+      "descripcion": "Explicaciones claras del funcionamiento real de los sistemas a bordo y de los procedimientos que se aplican en cada guardia.",
+      "noindex": false
+    },
+    {
+      "ruta": "/guias/cubierta/",
+      "titulo": "Cubierta y navegación · Guías | Rumbo Mercante",
+      "descripcion": "Guardias de puente, maniobras y operaciones de cubierta.",
+      "noindex": false
+    },
+    {
+      "ruta": "/guias/formacion/",
+      "titulo": "Formación y estudios · Guías | Rumbo Mercante",
+      "descripcion": "Cómo elegir especialidad, estudiar y prepararte para los exámenes.",
+      "noindex": false
+    },
+    {
+      "ruta": "/guias/sala-de-maquinas/",
+      "titulo": "Sala de máquinas · Guías | Rumbo Mercante",
+      "descripcion": "Motores, auxiliares, combustible y el día a día del departamento de máquinas.",
+      "noindex": false
+    },
+    {
+      "ruta": "/guias/seguridad/",
+      "titulo": "Seguridad · Guías | Rumbo Mercante",
+      "descripcion": "Procedimientos, permisos de trabajo, emergencias y prevención.",
+      "noindex": false
+    },
+    {
+      "ruta": "/nosotros/",
+      "titulo": "Nosotros | Rumbo Mercante",
+      "descripcion": "De cero a la mar: el camino real del marino mercante. La historia de Jhonny Castorani y el origen de Rumbo Mercante.",
+      "noindex": false
+    },
+    {
+      "ruta": "/politica-de-privacidad/",
+      "titulo": "Política de privacidad | Rumbo Mercante",
+      "descripcion": "Cómo trata Rumbo Mercante los datos personales de sus visitantes.",
+      "noindex": false
+    },
+    {
+      "ruta": "/recursos/",
+      "titulo": "Recursos | Rumbo Mercante",
+      "descripcion": "Material operativo listo para usar: plantillas, checklists imprimibles, glosarios de inglés técnico y calculadoras para el trabajo a bordo.",
+      "noindex": false
+    },
+    {
+      "ruta": "/recursos/checklists/",
+      "titulo": "Checklists · Recursos | Rumbo Mercante",
+      "descripcion": "Listas de verificación imprimibles para embarques, guardias y operaciones.",
+      "noindex": false
+    },
+    {
+      "ruta": "/recursos/herramientas/",
+      "titulo": "Herramientas · Recursos | Rumbo Mercante",
+      "descripcion": "Calculadoras y conversores interactivos que funcionan en el móvil.",
+      "noindex": false
+    },
+    {
+      "ruta": "/recursos/herramientas/calculadora-descanso/",
+      "titulo": "Calculadora de horas de descanso STCW / MLC | Rumbo Mercante",
+      "descripcion": "Marca tus horas de trabajo en una semana y comprueba si cumples los mínimos de descanso del Convenio STCW (Regla VIII/1) y el MLC 2006.",
+      "noindex": false
+    },
+    {
+      "ruta": "/recursos/herramientas/conversor-unidades/",
+      "titulo": "Conversor de unidades marítimas | Rumbo Mercante",
+      "descripcion": "Convierte presión, temperatura, potencia, volumen, caudal, distancia, velocidad, masa y par: las unidades que se usan a bordo.",
+      "noindex": false
+    },
+    {
+      "ruta": "/recursos/ingles-maritimo/",
+      "titulo": "Inglés marítimo · Recursos | Rumbo Mercante",
+      "descripcion": "Glosarios y frases técnicas para comunicarte a bordo.",
+      "noindex": false
+    },
+    {
+      "ruta": "/recursos/plantillas/",
+      "titulo": "Plantillas · Recursos | Rumbo Mercante",
+      "descripcion": "Registros, formatos y hojas de cálculo listos para descargar y usar.",
+      "noindex": false
+    },
+    {
+      "ruta": "/terminos/",
+      "titulo": "Términos de uso | Rumbo Mercante",
+      "descripcion": "Condiciones de uso del sitio web y de los recursos descargables de Rumbo Mercante.",
+      "noindex": false
+    },
+    {
+      "ruta": "/vida-a-bordo/",
+      "titulo": "Vida a Bordo y Desarrollo Profesional | Rumbo Mercante",
+      "descripcion": "Lo que no se enseña en la academia: primer embarque, fatiga, convivencia, ascensos y cómo trazar tu carrera por mérito propio.",
+      "noindex": false
+    },
+    {
+      "ruta": "/vida-a-bordo/bienestar/",
+      "titulo": "Bienestar y fatiga · Vida a Bordo | Rumbo Mercante",
+      "descripcion": "Descanso, salud, convivencia y vida lejos de casa.",
+      "noindex": false
+    },
+    {
+      "ruta": "/vida-a-bordo/carrera-profesional/",
+      "titulo": "Carrera profesional · Vida a Bordo | Rumbo Mercante",
+      "descripcion": "Ascensos, títulos, tipos de buque y cómo crecer por mérito propio.",
+      "noindex": false
+    },
+    {
+      "ruta": "/vida-a-bordo/primer-embarque/",
+      "titulo": "Primer embarque · Vida a Bordo | Rumbo Mercante",
+      "descripcion": "Todo lo que necesitas saber antes y durante tus prácticas a bordo.",
+      "noindex": false
+    }
+  ]
+}
