@@ -8,6 +8,23 @@
   const PANEL_JS = '/admin/sveltia-cms-0.266.0.js';
   const PANEL_HUELLA = 'sha384-MvIc9V6dpnf1+8gMj6610BmYWClYbpAyg810CA5ad7jCJmLlpGsOZTJOpOewp0wn';
 
+  // Diagnóstico: si las reglas de seguridad bloquean algo que el panel necesita, se muestra un aviso
+  // (sin datos privados) para poder corregirlo. Se ignora la comprobación de versiones nuevas, bloqueada a propósito.
+  const bloqueados = new Set();
+  document.addEventListener('securitypolicyviolation', (e) => {
+    const url = String(e.blockedURI || '');
+    if (url.includes('@sveltia/cms/package.json')) return;
+    bloqueados.add(`${e.effectiveDirective}: ${url.split('?')[0].slice(0, 90)}`);
+    let caja = document.getElementById('aviso-bloqueo');
+    if (!caja) {
+      caja = document.createElement('div');
+      caja.id = 'aviso-bloqueo';
+      caja.style.cssText = 'position:fixed;left:12px;bottom:12px;z-index:99999;max-width:520px;padding:10px 12px;border-radius:10px;background:#8a1f11;color:#fff;font:12px/1.4 system-ui,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.35)';
+      document.body.appendChild(caja);
+    }
+    caja.textContent = 'Bloqueado por seguridad (envía una captura): ' + [...bloqueados].join(' · ');
+  });
+
   const acceso = document.getElementById('acceso');
   const form = document.getElementById('form-acceso');
   const error = document.getElementById('error');

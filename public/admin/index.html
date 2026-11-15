@@ -8,7 +8,7 @@
   <meta name="referrer" content="no-referrer">
   <!-- Reglas de seguridad: el panel solo carga código de esta web y solo habla con GitHub.
        En la web publicada van además como cabeceras (vercel.json), que también impiden incrustar el panel en otra página. -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://avatars.githubusercontent.com https://raw.githubusercontent.com; font-src 'self' data: https://cdn.jsdelivr.net/fontsource/fonts/; connect-src 'self' data: https://api.github.com https://raw.githubusercontent.com https://unpkg.com/@sveltia/cms@0.266.0/locales/ https://www.githubstatus.com/api/; worker-src 'self' blob:; manifest-src 'self' blob:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://avatars.githubusercontent.com https://raw.githubusercontent.com; font-src 'self' data: https://cdn.jsdelivr.net/fontsource/fonts/; connect-src 'self' blob: data: https://api.github.com https://raw.githubusercontent.com https://unpkg.com/@sveltia/cms@0.266.0/locales/ https://www.githubstatus.com/api/; worker-src 'self' blob:; manifest-src 'self' blob:; frame-src blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'none'">
   <title>Panel · Rumbo Mercante</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="stylesheet" href="/_astro/fonts.css?v=20261108">
