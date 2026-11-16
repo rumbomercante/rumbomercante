@@ -40,12 +40,23 @@
       hero.addEventListener('pointerleave', function () { target = start; });
     }
 
-    gsap.ticker.add(function (time) {
+    function tick(time) {
       var d = ((target - heading + 540) % 360) - 180; // camino más corto
       heading += d * 0.06;                            // la tarjeta se asienta con inercia
       var idle = Math.sin(time * 0.9) * 1.6;           // reposo: oscila como un compás real
       draw(heading + idle);
-    });
+    }
+    // Solo se anima mientras la cabecera está en pantalla: al bajar por la página descansa
+    // (antes se redibujaba en cada fotograma aunque no se viera, y restaba fluidez al desplazarse).
+    var activa = false;
+    function activar(si) {
+      if (si === activa) return;
+      activa = si;
+      if (si) gsap.ticker.add(tick); else gsap.ticker.remove(tick);
+    }
+    if ('IntersectionObserver' in window && hero) {
+      new IntersectionObserver(function (es) { activar(es[0].isIntersecting); }).observe(hero);
+    } else activar(true);
   }
 
   var s = document.createElement('script');

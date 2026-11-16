@@ -7,8 +7,8 @@
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --dur-hover: 250ms;
   --dur-press: 140ms;
-  --dur-reveal: 480ms;
-  --stagger: 60ms;
+  --dur-reveal: 240ms; /* antes 480ms: las secciones tardaban en aparecer */
+  --stagger: 25ms;
   --shadow-rest: 0 1px 2px #061a2d0f, 0 2px 6px #061a2d0d;
   --shadow-hover: 0 14px 32px -14px #061a2d40, 0 4px 10px -4px #061a2d14;
 }
@@ -18,7 +18,7 @@
    Se usa animation con fill "backwards": al terminar, el elemento
    vuelve a sus estilos normales y el hover funciona sin retraso. */
 @keyframes rm-reveal {
-  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+  from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: none; }
 }
 
