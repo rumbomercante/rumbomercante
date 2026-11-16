@@ -17,3 +17,24 @@
       var(--navy-900);
   }
 }
+
+/* Título lateral: ahora es h2 (orden correcto de títulos), con el mismo aspecto que tenía como h3 */
+.side-card .side-titulo { font-size: 1.3rem; color: var(--white); }
+
+/* ---------- Formulario: bordes visibles, foco claro y avisos de error ---------- */
+#contenido .form .input:not(:focus), #contenido .form .select:not(:focus), #contenido .form .textarea:not(:focus) {
+  border-color: rgba(6, 26, 45, .42); /* contraste suficiente sobre el vidrio claro */
+}
+#contenido .form .input:focus-visible, #contenido .form .select:focus-visible, #contenido .form .textarea:focus-visible {
+  border-color: #1e4f7a; outline: 3px solid rgba(30, 79, 122, .55); outline-offset: 1px;
+}
+#contenido .form [aria-invalid="true"], #contenido .form .input:user-invalid, #contenido .form .textarea:user-invalid {
+  border-color: #c0392b !important;
+}
+.form .consent input[aria-invalid="true"] { outline: 2px solid #c0392b; outline-offset: 2px; }
+.form .field-error { margin: .35rem 0 0; color: #a32a1c; font-size: .86rem; font-weight: 500; }
+.form .field-error::before { content: "⚠ "; }
+.form .status[data-state="error"] { color: #a32a1c; font-weight: 600; }
+.form .status[data-state="ok"] { color: #1d6b3a; font-weight: 600; }
+.form button[type="submit"]:disabled { opacity: .65; cursor: wait; }
+.form .row { align-items: start; } /* cada campo conserva su altura aunque el vecino muestre un aviso */

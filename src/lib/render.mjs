@@ -1,6 +1,7 @@
 // Arma el HTML final de cada página a partir de las plantillas y de los datos editables.
 import fs from 'node:fs';
 import path from 'node:path';
+import { createHash } from 'node:crypto';
 
 const leer = (r) => fs.readFileSync(path.join(process.cwd(), 'src', r), 'utf8');
 const json = (r) => JSON.parse(leer(r));
@@ -26,6 +27,32 @@ const HERRAMIENTAS = [
 ];
 const subDe = (sec, sub) => SECS[sec].subs.find((s) => s.key === sub) ?? { key: sub, nombre: sub };
 
+// Medidas de una imagen local (WebP, JPEG o PNG) leídas de su cabecera, para declarar width/height
+// en las imágenes subidas desde el panel y evitar saltos de la página mientras cargan.
+function medidasImagen(src) {
+  if (!src || !src.startsWith('/')) return null;
+  let b;
+  try { b = fs.readFileSync(path.join(process.cwd(), 'public', decodeURIComponent(src))); } catch { return null; }
+  if (b.length < 30) return null;
+  if (b.toString('ascii', 0, 4) === 'RIFF' && b.toString('ascii', 8, 12) === 'WEBP') {
+    const t = b.toString('ascii', 12, 16);
+    if (t === 'VP8X') return { w: 1 + b.readUIntLE(24, 3), h: 1 + b.readUIntLE(27, 3) };
+    if (t === 'VP8 ') return { w: b.readUInt16LE(26) & 0x3fff, h: b.readUInt16LE(28) & 0x3fff };
+    if (t === 'VP8L') { const v = b.readUInt32LE(21); return { w: 1 + (v & 0x3fff), h: 1 + ((v >> 14) & 0x3fff) }; }
+    return null;
+  }
+  if (b.readUInt32BE(0) === 0x89504e47) return { w: b.readUInt32BE(16), h: b.readUInt32BE(20) };
+  if (b[0] === 0xff && b[1] === 0xd8) {
+    for (let i = 2; i < b.length - 9;) {
+      if (b[i] !== 0xff) { i++; continue; }
+      const m = b[i + 1];
+      if (m >= 0xc0 && m <= 0xcf && ![0xc4, 0xc8, 0xcc].includes(m)) return { w: b.readUInt16BE(i + 7), h: b.readUInt16BE(i + 5) };
+      i += 2 + b.readUInt16BE(i + 2);
+    }
+  }
+  return null;
+}
+
 // Fecha de hoy en Venezuela (UTC−4): los artículos con fecha futura quedan programados y no se publican
 // hasta ese día (la web se reconstruye sola cada noche, ver api/publicar-programados.js).
 const HOY_VE = new Date(Date.now() - 4 * 3600e3).toISOString().slice(0, 10);
@@ -38,8 +65,9 @@ export function preparar(entradas) {
       const d = e.data;
       const [seccion, subseccion] = d.categoria.split('/');
       const palabras = (e.body ?? '').split(/\s+/).filter(Boolean).length;
+      const med = d.imagenAncho ? null : medidasImagen(d.imagen);
       return {
-        ...d, slug: e.id, html: e.rendered?.html ?? '', headings: e.rendered?.metadata?.headings ?? [],
+        ...d, ...(med ? { imagenAncho: med.w, imagenAlto: med.h } : {}), slug: e.id, html: e.rendered?.html ?? '', headings: e.rendered?.metadata?.headings ?? [],
         seccion, subseccion, ruta: `/${seccion}/${subseccion}/${e.id}/`,
         fechaTxt: fechaTxt(d.fecha), iso: d.fecha.toISOString().slice(0, 10),
         min: d.minutos || Math.max(1, Math.ceil(palabras / 200)),
@@ -96,8 +124,31 @@ const pieHtml = () => fill(PIE, {
     `<li${CF}><a href="${esc(e.url)}"${e.externo ? ' target="_blank" rel="noopener"' : ''}${CF}>${esc(e.texto)}${e.externo ? ' ' + EXTERNO : ''}</a></li>`).join('') + '</ul></div>').join(''),
 });
 
+// ---------- Hojas de estilo unidas ----------
+// Cada tipo de página cargaba 6-8 hojas de estilo por separado antes de mostrarse. Se unen, en el mismo
+// orden (incluido el bloque <style> intermedio), en un solo archivo con huella en el nombre.
+const ESTILOS = {}; // tipo -> { tail, href, css }
+function estilosUnidos(tipo, tail) {
+  if (ESTILOS[tipo]) return ESTILOS[tipo].tail;
+  const trozos = [...tail.matchAll(/<link rel="stylesheet" href="([^"]+)">|<style>([\s\S]*?)<\/style>/g)];
+  const links = trozos.filter((t) => t[1]);
+  if (links.length < 2) return (ESTILOS[tipo] = { tail }).tail;
+  const inicio = links[0].index;
+  const fin = links.at(-1).index + links.at(-1)[0].length;
+  const dentro = trozos.filter((t) => t.index >= inicio && t.index < fin);
+  const resto = dentro.reduce((s, t) => s.replace(t[0], ''), tail.slice(inicio, fin));
+  if (resto.trim()) return (ESTILOS[tipo] = { tail }).tail; // hay otras etiquetas en medio: no se toca
+  const css = dentro.map((t) => t[1]
+    ? `/* ${t[1]} */\n` + fs.readFileSync(path.join(process.cwd(), 'public', t[1].split('?')[0]), 'utf8')
+    : `/* bloque de la plantilla */\n${t[2]}`).join('\n');
+  const huella = createHash('sha256').update(css).digest('hex').slice(0, 10);
+  const href = `/_astro/estilos-${tipo}-${huella}.css`;
+  ESTILOS[tipo] = { href, css, tail: tail.slice(0, inicio) + `<link rel="stylesheet" href="${href}">` + tail.slice(fin) };
+  return ESTILOS[tipo].tail;
+}
+
 const envolver = (tipo, meta, main, analytics, extra = '', ruta = '') => {
-  const s = SHELLS[tipo];
+  const s = { ...SHELLS[tipo], tail: estilosUnidos(tipo, SHELLS[tipo].tail) };
   const pre = fill(s.pre, { SITE }).replace(/<ul id="nav-list"[\s\S]*?<\/ul>/, () => navHtml(ruta));
   const post = fill(s.post, { SITE, ANALYTICS: analytics }).replace(/<footer[\s\S]*?<\/footer>/, () => pieHtml());
   const out = s.doc + verificacion() + meta + fill(s.tail + cssApariencia() + extra, { SITE }) + '</head>' + pre + main + post;
@@ -122,6 +173,15 @@ const tarjeta = (p) => fill(I.card, {
   TAGS: fill(I.tag, { T: esc(p.tipo) }) + (p.descargaUrl ? I.tagDescarga : ''),
 });
 
+// Tablas cuya primera celda de encabezado está vacía (la primera columna nombra cada fila):
+// la primera celda de cada fila pasa a ser encabezado de fila, para que los lectores de pantalla la anuncien.
+const encabezadosDeFila = (html) => html.replace(/<table>[\s\S]*?<\/table>/g, (tabla) => {
+  const primera = tabla.match(/<thead>\s*<tr>\s*<th[^>]*>([\s\S]*?)<\/th>/);
+  if (!primera || primera[1].trim()) return tabla;
+  return tabla.replace(/<tbody>[\s\S]*?<\/tbody>/, (cuerpo) =>
+    cuerpo.replace(/<tr>(\s*)<td([^>]*)>([\s\S]*?)<\/td>/g, '<tr>$1<th scope="row"$2>$3</th>'));
+});
+
 function articulo(p, posts) {
   const url = SITE + p.ruta;
   const otros = posts.filter((x) => x.seccion === p.seccion && x.slug !== p.slug);
@@ -133,14 +193,14 @@ function articulo(p, posts) {
   const main = fill(I.art, {
     SITE, PATH: p.ruta, ACCENT: p.sec.accent, SEC: p.seccion, SUB: p.subseccion, SUBLABEL: esc(p.subLabel), CORTA: esc(p.sec.corta), TIPO: esc(p.tipo),
     TITULO: esc(p.titulo), DESC: esc(p.descripcion), MIN: p.min, FECHATXT: p.fechaTxt, IMG: p.imagen, COVERA: p.imagenAncho ? `alt="${esc(p.imagenAlt)}" width="${p.imagenAncho}" height="${p.imagenAlto}"` : (p.imagenAlt ? `alt="${esc(p.imagenAlt)}"` : 'alt'),
-    WA: encodeURIComponent(`${p.titulo} ${url}`), ACTIONS: acciones, BODY: p.html, TOC: toc,
+    WA: encodeURIComponent(`${p.titulo} ${url}`), ACTIONS: acciones, BODY: encabezadosDeFila(p.html), TOC: toc,
     TAGS: p.etiquetas.map((t) => fill(I.tagHash, { T: esc(t) })).join(''), REL: rel,
   });
   const t = p.seo?.titulo || `${p.titulo} | ${seo.nombre}`;
   const d = p.seo?.descripcion || p.descripcion;
   const img = p.seo?.imagen || p.imagen;
   const meta = fill(I.artMeta, { OGW: p.seo?.imagen ? 1200 : (p.imagenAncho || 1200), OGH: p.seo?.imagen ? 630 : (p.imagenAlto || 630), SITE, PATH: p.ruta, OGIMG: img.startsWith('http') ? img : SITE + img, SEOT: esc(t), SEOD: esc(d), ALT_OG: esc(p.titulo), FECHA: p.iso });
-  const analytics = `<vercel-analytics data-props="{}" data-params="${esc(JSON.stringify({ categoria: p.seccion, sub: p.subseccion, slug: p.slug }))}" data-pathname="${p.ruta}"></vercel-analytics>`;
+  const analytics = ''; // Estadística de Vercel retirada (no estaba activada y daba error 404)
   const autor = { '@type': 'Person', name: AUTOR, url: `${SITE}/nosotros/` };
   const datos = ld({ '@context': 'https://schema.org', '@graph': [
     { '@type': 'Article', headline: p.titulo, description: d, datePublished: p.iso, image: img.startsWith('http') ? img : SITE + img, author: autor, publisher: { '@type': 'Organization', name: seo.nombre, url: SITE }, mainEntityOfPage: url, inLanguage: 'es' },
@@ -247,6 +307,16 @@ function aplicarAutor(n) {
 }
 let AUTOR = 'Jhonny Castorani';
 
+// Las fotos de cabecera del blog y de contacto son fondos CSS: el navegador no las descubre hasta tarde.
+// Se le avisan desde el principio (con la versión de móvil en pantallas pequeñas) para que la cabecera cargue antes.
+const precargaFondo = (movil, escritorio) =>
+  `<link rel="preload" as="image" href="${movil}" type="image/webp" media="(max-width: 700px)" fetchpriority="high">` +
+  `<link rel="preload" as="image" href="${escritorio}" type="image/webp" media="(min-width: 701px)" fetchpriority="high">`;
+const PRECARGA = {
+  blog: precargaFondo('/img/crucero-blog-sm.webp', '/img/crucero-blog.webp'),
+  contacto: precargaFondo('/img/portacontenedores-contacto-sm.webp', '/img/portacontenedores-contacto.webp'),
+};
+
 export function paginas(posts, pags = []) {
   const PAG = Object.fromEntries(pags.map((e) => [e.id, e]));
   aplicarAutor(PAG.nosotros?.data);
@@ -269,9 +339,11 @@ export function paginas(posts, pags = []) {
     else main = fill(pagina(seg.join('__') || 'home'), { SITE });
     const vacia = info.tipo === 'sub' && !posts.some((p) => p.seccion === seg[0] && p.subseccion === seg[1]) && seg[1] !== 'herramientas';
     const sinIndice = seoDe(ruta)?.noindex || vacia || info.tipo === 'nf';
-    if (info.tipo === 'contacto') main = main.split('contacto@rumbomercante.com').join(esc(seo.correoContacto));
+    if (info.tipo === 'contacto') main = seo.correoContacto
+      ? main.split('contacto@rumbomercante.com').join(esc(seo.correoContacto))
+      : main.replace(/<p class="direct"[\s\S]*?<\/p>/, ''); // sin correo público: no se muestra la línea
     const datos = info.tipo === 'home' ? ld({ '@context': 'https://schema.org', '@graph': [{ '@type': 'Organization', name: seo.nombre, url: SITE, logo: `${SITE}/favicon.svg` }, { '@type': 'WebSite', name: seo.nombre, url: SITE, inLanguage: 'es' }] }) : '';
-    let cabeza = (sinIndice ? NOINDEX : '') + metaPagina(ruta);
+    let cabeza = (sinIndice ? NOINDEX : '') + metaPagina(ruta) + (PRECARGA[info.tipo] ?? '');
     if (info.tipo === 'nf') cabeza = cabeza.replace(/<link rel="canonical"[^>]*>/, '');
     add(salida, envolver(info.tipo, cabeza, main, anal(ruta), datos, ruta));
     if (!sinIndice) mapa.push({ ruta, fecha: hoy });
@@ -282,6 +354,7 @@ export function paginas(posts, pags = []) {
   }
   mapa.sort((a, b) => a.ruta.localeCompare(b.ruta));
   add('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${mapa.map((u) => `  <url><loc>${SITE}${u.ruta}</loc><lastmod>${u.fecha}</lastmod></url>`).join('\n')}\n</urlset>\n`);
+  for (const e of Object.values(ESTILOS)) if (e.css) add(e.href.slice(1), e.css);
   add('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
   return R;
 }

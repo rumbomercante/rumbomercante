@@ -409,7 +409,7 @@ collections:
         fields:
           - { name: url, label: Dirección del sitio, widget: string, hint: "Cámbiala cuando tengas el dominio. Sin barra al final." }
           - { name: nombre, label: Nombre del sitio, widget: string }
-          - { name: correoContacto, label: Correo de contacto, widget: string }
+          - { name: correoContacto, label: Correo de contacto público, widget: string, required: false, hint: "Se muestra en la página de Contacto («También puedes escribir directamente a…»). Déjalo vacío para no mostrar ningún correo: los mensajes del formulario te llegan igual." }
           - { name: verificacionGoogle, label: Código de Google Search Console, widget: string, required: false }
           - { name: verificacionBing, label: Código de Bing, widget: string, required: false }
 

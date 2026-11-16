@@ -401,3 +401,21 @@
     linear-gradient(160deg, rgba(10, 40, 72, .6), rgba(6, 26, 45, .72)) !important;
 }
 .ad-slide .ad-card-k, .ad-slide .ad-card-q { color: #fff; }
+
+/* ---------- Carrusel de anunciantes: botón de pausa y movimiento reducido ---------- */
+.ad-pausa {
+  position: absolute; top: .35rem; right: .75rem; z-index: 3;
+  display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border-radius: 50%; cursor: pointer;
+  color: #f0c27a; background: rgba(6, 26, 45, .72); border: 1px solid rgba(240, 194, 122, .45);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+}
+.ad-pausa:hover { background: rgba(6, 26, 45, .9); }
+.ad-pausa .i-play, .ad-marquee.is-paused .ad-pausa .i-pausa { display: none; }
+.ad-marquee.is-paused .ad-pausa .i-play { display: block; }
+.ad-marquee.is-paused .ad-track { animation-play-state: paused; }
+/* Quien pidió menos movimiento en su dispositivo: el carrusel queda quieto y se recorre deslizando */
+@media (prefers-reduced-motion: reduce) {
+  .ad-track { animation: none !important; }
+  .ad-marquee { overflow-x: auto; overscroll-behavior-x: contain; }
+  .ad-slide[aria-hidden="true"], .ad-pausa { display: none; }
+}

@@ -94,3 +94,9 @@
   transition: background .2s ease, color .2s ease, border-color .2s ease;
 }
 .footer-redes a:hover, .footer-redes a:focus-visible { background: var(--brass, #f0c27a); color: var(--navy-950, #03101d); border-color: transparent; }
+
+/* ---------- Portada en el móvil: las secciones de abajo se preparan solo al acercarse ----------
+   Menos trabajo al abrir la página. "auto" recuerda la altura real para que la barra de desplazamiento no salte. */
+@media (max-width: 700px) {
+  .page-dm #contenido > section:nth-of-type(n+3) { content-visibility: auto; contain-intrinsic-size: auto 720px; }
+}

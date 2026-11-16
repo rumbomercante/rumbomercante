@@ -97,3 +97,9 @@
 .prose .boton-articulo .btn { text-decoration: none; color: var(--navy-950, #061a2d); }
 .prose .video-articulo { margin: 1.6rem 0; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; background: #061a2d; }
 .prose .video-articulo iframe { display: block; width: 100%; height: 100%; border: 0; }
+
+/* Encabezados de fila en las tablas (primera columna): mismo aspecto que las demás celdas */
+.prose tbody th[scope="row"] {
+  color: inherit; background: transparent; white-space: normal; font-weight: inherit;
+  border-top: 1px solid var(--line); vertical-align: top; padding: .65rem 1rem; text-align: left;
+}
