@@ -141,6 +141,9 @@
 
 /* el carrusel recorta sombras: más aire para que no se vea el corte */
 .dm-band:has(.dm-track) .dm-track { padding: .75rem .75rem 2.5rem; margin: -.75rem -.75rem -2rem; }
+/* Sin esto, al cargar la página el carrusel se desplazaba solo 12 px para alinear la primera tarjeta,
+   y Chrome lo tomaba como si el visitante ya se moviera: dejaba de medir el contenido principal (NO_LCP). */
+.dm-band:has(.dm-track) .dm-track { scroll-padding-inline: .75rem; }
 
 /* ---------- 5. Anunciantes: luces detrás y tarjetas de vidrio ---------- */
 .ads[data-astro-cid-5cg62lrn] { position: relative; isolation: isolate; overflow: hidden; background: #f3eee3 !important; }

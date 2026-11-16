@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "node scripts/verificar-config.mjs && astro build",
+    "build": "node scripts/verificar-config.mjs && node scripts/miniaturas.mjs && astro build",
     "preview": "astro preview"
   },
   "dependencies": {

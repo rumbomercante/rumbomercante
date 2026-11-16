@@ -124,6 +124,31 @@ const pieHtml = () => fill(PIE, {
     `<li${CF}><a href="${esc(e.url)}"${e.externo ? ' target="_blank" rel="noopener"' : ''}${CF}>${esc(e.texto)}${e.externo ? ' ' + EXTERNO : ''}</a></li>`).join('') + '</ul></div>').join(''),
 });
 
+// ---------- Fotos de artículos a su tamaño (srcset) ----------
+// scripts/miniaturas.mjs crea /img/mini/<nombre>-<ancho>.webp; aquí se ofrecen al navegador con el
+// tamaño real al que se muestra cada tipo de tarjeta, para que no descargue la foto de 1600 px.
+const TAMANOS = {
+  card: '(max-width: 700px) calc(100vw - 42px), 314px',
+  post: '(max-width: 700px) calc(100vw - 60px), 630px',
+  recent: '42px',
+  start: '(max-width: 700px) 110px, 170px',
+  slide: '285px',
+  art: '(max-width: 860px) calc(100vw - 70px), 611px',
+};
+for (const k of Object.keys(TAMANOS)) if (typeof I[k] === 'string') I[k] = I[k].replace('src="{{IMG}}"', `src="{{IMG}}" {{SRCSET_${k}}}`);
+const srcsetDe = (src, tipo) => {
+  const m = /^\/img\/articulos\/([^/]+)\.(?:jpe?g|png|webp)$/i.exec(src);
+  if (!m) return '';
+  const partes = [200, 400, 700, 1000]
+    .filter((w) => fs.existsSync(path.join(process.cwd(), 'public/img/mini', `${m[1]}-${w}.webp`)))
+    .map((w) => `/img/mini/${m[1]}-${w}.webp ${w}w`);
+  if (!partes.length) return '';
+  const med = medidasImagen(src);
+  if (med) partes.push(`${src} ${med.w}w`);
+  return `srcset="${partes.join(', ')}" sizes="${TAMANOS[tipo]}"`;
+};
+const ponerSrcset = (html) => html.replace(/src="([^"]+)" \{\{SRCSET_(\w+)\}\}/g, (_, src, tipo) => `src="${src}" ${srcsetDe(src, tipo)}`.trimEnd());
+
 // ---------- Hojas de estilo unidas ----------
 // Cada tipo de página cargaba 6-8 hojas de estilo por separado antes de mostrarse. Se unen, en el mismo
 // orden (incluido el bloque <style> intermedio), en un solo archivo con huella en el nombre.
@@ -151,7 +176,7 @@ const envolver = (tipo, meta, main, analytics, extra = '', ruta = '') => {
   const s = { ...SHELLS[tipo], tail: estilosUnidos(tipo, SHELLS[tipo].tail) };
   const pre = fill(s.pre, { SITE }).replace(/<ul id="nav-list"[\s\S]*?<\/ul>/, () => navHtml(ruta));
   const post = fill(s.post, { SITE, ANALYTICS: analytics }).replace(/<footer[\s\S]*?<\/footer>/, () => pieHtml());
-  const out = s.doc + verificacion() + meta + fill(s.tail + cssApariencia() + extra, { SITE }) + '</head>' + pre + main + post;
+  const out = s.doc + verificacion() + meta + fill(s.tail + cssApariencia() + extra, { SITE }) + '</head>' + pre + ponerSrcset(main) + post;
   return out;
 };
 const reemplazaValor = (m, viejo, nuevo) => (viejo === nuevo ? m : m.split(`"${esc(viejo)}"`).join(`"${esc(nuevo)}"`).split(`>${esc(viejo)}<`).join(`>${esc(nuevo)}<`));
