@@ -1,7 +1,12 @@
 {
   "lema": "Recursos, herramientas y conocimiento operativo para el día a día de la gente de mar.",
   "firma": "Bienvenido a tu guardia diaria. Nos vemos a bordo.",
-  "redes": [],
+  "redes": [
+    {
+      "red": "instagram",
+      "url": "https://instagram.com/rumbomercante"
+    }
+  ],
   "columnas": [
     {
       "titulo": "Secciones",
