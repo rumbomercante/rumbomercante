@@ -100,3 +100,13 @@
 @media (max-width: 700px) {
   .page-dm #contenido > section:nth-of-type(n+3) { content-visibility: auto; contain-intrinsic-size: auto 720px; }
 }
+
+/* ---------- Fluidez al desplazarse: sin desenfoque de fondo en las tarjetas del contenido ----------
+   El efecto vidrio (backdrop-filter) obliga a recalcular el desenfoque en cada fotograma al bajar por
+   la página (eran 45 tarjetas en la portada, 24 de ellas en movimiento). Comprobado con capturas:
+   detrás de las tarjetas el fondo ya es un degradado suave, así que sin desenfoque se ven igual.
+   Se conserva en la barra superior (ahí sí se nota, el contenido pasa por debajo) y en "Destacados". */
+#contenido *:not(.dm-start), #contenido *::before, #contenido *::after {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
