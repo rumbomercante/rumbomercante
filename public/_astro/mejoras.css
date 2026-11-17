@@ -115,3 +115,9 @@
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
 }
+
+/* ---------- Pie: columna de redes y enlaces legales abajo ---------- */
+.footer-conecta .footer-redes { margin-top: .2rem; }
+.footer-legal { display: flex; flex-wrap: wrap; gap: .4rem 1.4rem; }
+.footer-legal a[data-astro-cid-jo6i4kqk] { color: #ffffff99; text-decoration: none; transition: color .2s ease; }
+.footer-legal a[data-astro-cid-jo6i4kqk]:hover, .footer-legal a[data-astro-cid-jo6i4kqk]:focus-visible { color: var(--brass-light, #f6d6a2); }

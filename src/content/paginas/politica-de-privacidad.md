@@ -39,7 +39,7 @@ El sitio se aloja en Vercel Inc. Las fuentes tipográficas se alojan en este mis
 
 ## 7. Cookies y estadísticas de visitas
 
-Rumbo Mercante no utiliza cookies publicitarias ni de seguimiento.
+Rumbo Mercante no utiliza cookies publicitarias ni de seguimiento. Solo guarda en tu navegador las preferencias que tú eliges (como el idioma); el detalle está en la [Política de cookies](/politica-de-cookies/).
 
 Para saber qué contenidos son más útiles se usa **Vercel Web Analytics**, que cuenta las visitas de forma agregada y anónima: no utiliza cookies, no identifica a los visitantes y no sigue su actividad en otros sitios web.
 

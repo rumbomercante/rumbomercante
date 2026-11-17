@@ -1,6 +1,7 @@
 {
   "lema": "Recursos, herramientas y conocimiento operativo para el día a día de la gente de mar.",
   "firma": "Bienvenido a tu guardia diaria. Nos vemos a bordo.",
+  "redesTitulo": "Rumbo Verdadero",
   "redes": [
     {
       "red": "instagram",
@@ -42,22 +43,7 @@
       ]
     },
     {
-      "titulo": "Herramientas",
-      "enlaces": [
-        {
-          "texto": "Calculadora de horas de descanso",
-          "url": "/recursos/herramientas/calculadora-descanso/",
-          "externo": false
-        },
-        {
-          "texto": "Conversor de unidades marítimas",
-          "url": "/recursos/herramientas/conversor-unidades/",
-          "externo": false
-        }
-      ]
-    },
-    {
-      "titulo": "Rumbo Mercante",
+      "titulo": "Enlaces Mercantes",
       "enlaces": [
         {
           "texto": "Nosotros",
@@ -65,7 +51,7 @@
           "externo": false
         },
         {
-          "texto": "Todas las publicaciones",
+          "texto": "Visitar Blog",
           "url": "/blog/",
           "externo": false
         },
@@ -78,20 +64,23 @@
           "texto": "Contacto",
           "url": "/contacto/",
           "externo": false
-        },
-        {
-          "texto": "Política de privacidad",
-          "url": "/politica-de-privacidad/",
-          "externo": false
-        },
-        {
-          "texto": "Términos de uso",
-          "url": "/terminos/",
-          "externo": false
         }
       ]
     }
   ],
   "copyright": "© 2026 Rumbo Mercante. Todos los derechos reservados.",
-  "coordenadas": "10°36′N · 66°56′W — Rumbo fijo, mar abierto"
+  "legales": [
+    {
+      "texto": "Política de Privacidad",
+      "url": "/politica-de-privacidad/"
+    },
+    {
+      "texto": "Política de Cookies",
+      "url": "/politica-de-cookies/"
+    },
+    {
+      "texto": "Términos y Condiciones",
+      "url": "/terminos/"
+    }
+  ]
 }

@@ -133,6 +133,12 @@
       "noindex": false
     },
     {
+      "ruta": "/politica-de-cookies/",
+      "titulo": "Política de cookies | Rumbo Mercante",
+      "descripcion": "Qué cookies y datos guarda Rumbo Mercante en tu navegador, para qué sirven y cómo borrarlos.",
+      "noindex": false
+    },
+    {
       "ruta": "/terminos/",
       "titulo": "Términos de uso | Rumbo Mercante",
       "descripcion": "Condiciones de uso del sitio web y de los recursos descargables de Rumbo Mercante.",

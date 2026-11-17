@@ -298,6 +298,16 @@ collections:
           - { name: etiqueta, label: Línea superior, widget: string }
           - { name: actualizado, label: Última actualización, widget: datetime, type: date, input_timezone: utc, hint: "Cámbiala cada vez que modifiques el texto." }
           - { name: body, label: Texto, widget: markdown, editor_components: [] }
+      - name: cookies
+        label: Política de cookies
+        file: src/content/paginas/politica-de-cookies.md
+        format: frontmatter
+        editor: { preview: false }
+        fields:
+          - { name: titulo, label: Título, widget: string }
+          - { name: etiqueta, label: Línea superior, widget: string }
+          - { name: actualizado, label: Última actualización, widget: datetime, type: date, input_timezone: utc, hint: "Cámbiala cada vez que modifiques el texto." }
+          - { name: body, label: Texto, widget: markdown, editor_components: [] }
       - name: terminos
         label: Términos de uso
         file: src/content/paginas/terminos.md
@@ -336,12 +346,13 @@ collections:
         fields:
           - { name: lema, label: Frase bajo el logo, widget: text }
           - { name: firma, label: Frase en cursiva, widget: string }
+          - { name: redesTitulo, label: Título de la columna de redes, widget: string, default: "Conéctate a Nuestro Rumbo" }
           - name: redes
             label: Redes sociales
             widget: list
             required: false
             summary: "{{red}}"
-            hint: "Aparecen como iconos bajo el logo, en todas las páginas."
+            hint: "Aparecen como iconos en la última columna del pie, en todas las páginas."
             fields:
               - name: red
                 label: Red
@@ -372,7 +383,14 @@ collections:
                   - { name: url, label: Dirección, widget: string }
                   - { name: externo, label: Es de otra web (abre en otra pestaña), widget: boolean, default: false, required: false }
           - { name: copyright, label: Texto de derechos, widget: string }
-          - { name: coordenadas, label: Coordenadas (abajo a la derecha), widget: string }
+          - name: legales
+            label: Enlaces legales (abajo a la derecha)
+            widget: list
+            required: false
+            summary: "{{texto}}"
+            fields:
+              - { name: texto, label: Texto, widget: string }
+              - { name: url, label: Dirección, widget: string }
 
   # ---------------- Apariencia y SEO ----------------
   - name: apariencia-seo

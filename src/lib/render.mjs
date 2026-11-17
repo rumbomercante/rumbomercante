@@ -119,7 +119,8 @@ const redesHtml = () => {
   }).join('') + '</ul>';
 };
 const pieHtml = () => fill(PIE, {
-  LEMA: esc(pie.lema), FIRMA: esc(pie.firma), REDES: redesHtml(), COPY: esc(pie.copyright), COORDS: esc(pie.coordenadas),
+  LEMA: esc(pie.lema), FIRMA: esc(pie.firma), REDES: redesHtml(), REDES_TITULO: esc(pie.redesTitulo ?? 'Conéctate a Nuestro Rumbo'), COPY: esc(pie.copyright),
+  LEGALES: (pie.legales ?? []).map((l) => `<a href="${esc(l.url)}"${CF}>${esc(l.texto)}</a>`).join(''),
   COLUMNAS: pie.columnas.map((c) => `<div${CF}><h3${CF}>${esc(c.titulo)}</h3><ul${CF}>` + c.enlaces.map((e) =>
     `<li${CF}><a href="${esc(e.url)}"${e.externo ? ' target="_blank" rel="noopener"' : ''}${CF}>${esc(e.texto)}${e.externo ? ' ' + EXTERNO : ''}</a></li>`).join('') + '</ul></div>').join(''),
 });
