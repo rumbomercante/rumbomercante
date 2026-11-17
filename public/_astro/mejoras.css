@@ -94,6 +94,11 @@
   transition: background .2s ease, color .2s ease, border-color .2s ease;
 }
 .footer-redes a:hover, .footer-redes a:focus-visible { background: var(--brass, #f0c27a); color: var(--navy-950, #03101d); border-color: transparent; }
+/* La regla general del pie (ul a: inline-flex + blanco !important) pisaba los iconos: se descentraban y perdían el dorado */
+.footer-redes[data-astro-cid-jo6i4kqk] a[data-astro-cid-jo6i4kqk] { display: grid; justify-content: center; align-content: center; padding: 0; color: var(--brass-light, #f0c27a) !important; }
+.footer-redes[data-astro-cid-jo6i4kqk] a[data-astro-cid-jo6i4kqk]:hover, .footer-redes[data-astro-cid-jo6i4kqk] a[data-astro-cid-jo6i4kqk]:focus-visible { color: var(--navy-950, #03101d) !important; }
+.footer-redes[data-astro-cid-jo6i4kqk] svg { display: block; }
+.footer-redes[data-astro-cid-jo6i4kqk] { display: flex; }
 
 /* ---------- Portada en el móvil: las secciones de abajo se preparan solo al acercarse ----------
    Menos trabajo al abrir la página. "auto" recuerda la altura real para que la barra de desplazamiento no salte. */
