@@ -134,3 +134,7 @@ iframe.goog-te-banner-frame,.goog-te-banner-frame,#goog-gt-tt,.goog-te-balloon-f
 /* Con el menú de celular abierto la barra debe seguir visible para poder cerrarlo:
    basta con bloquear el scroll en <html>; si <body> también recorta, la barra se pierde. */
 body:has(.site-header.is-open) { overflow: visible !important; }
+
+/* ---------- Nombre del logo: RUMBO en negrita, MERCANTE normal, en Jost y mayúsculas ---------- */
+.logo-name[data-astro-cid-f7espo7c] { font-family: 'Jost', sans-serif; text-transform: uppercase; letter-spacing: .06em; font-weight: 700; }
+.logo-name[data-astro-cid-f7espo7c] em[data-astro-cid-f7espo7c] { font-weight: 400; font-style: normal; }

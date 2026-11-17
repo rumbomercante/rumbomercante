@@ -176,7 +176,8 @@ const envolver = (tipo, meta, main, analytics, extra = '', ruta = '') => {
   const s = { ...SHELLS[tipo], tail: estilosUnidos(tipo, SHELLS[tipo].tail) };
   const pre = fill(s.pre, { SITE }).replace(/<ul id="nav-list"[\s\S]*?<\/ul>/, () => navHtml(ruta));
   const post = fill(s.post, { SITE, ANALYTICS: analytics }).replace(/<footer[\s\S]*?<\/footer>/, () => pieHtml());
-  const out = s.doc + verificacion() + meta + fill(s.tail + cssApariencia() + extra, { SITE }) + '</head>' + pre + ponerSrcset(main) + post;
+  const cabeza = meta.replace('<link rel="icon" type="image/svg+xml" href="/favicon.svg">', '$&<link rel="apple-touch-icon" href="/apple-touch-icon.png">');
+  const out = s.doc + verificacion() + cabeza + fill(s.tail + cssApariencia() + extra, { SITE }) + '</head>' + pre + ponerSrcset(main) + post;
   return out;
 };
 const reemplazaValor = (m, viejo, nuevo) => (viejo === nuevo ? m : m.split(`"${esc(viejo)}"`).join(`"${esc(nuevo)}"`).split(`>${esc(viejo)}<`).join(`>${esc(nuevo)}<`));
@@ -367,7 +368,7 @@ export function paginas(posts, pags = []) {
     if (info.tipo === 'contacto') main = seo.correoContacto
       ? main.split('contacto@rumbomercante.com').join(esc(seo.correoContacto))
       : main.replace(/<p class="direct"[\s\S]*?<\/p>/, ''); // sin correo público: no se muestra la línea
-    const datos = info.tipo === 'home' ? ld({ '@context': 'https://schema.org', '@graph': [{ '@type': 'Organization', name: seo.nombre, url: SITE, logo: `${SITE}/favicon.svg` }, { '@type': 'WebSite', name: seo.nombre, url: SITE, inLanguage: 'es' }] }) : '';
+    const datos = info.tipo === 'home' ? ld({ '@context': 'https://schema.org', '@graph': [{ '@type': 'Organization', name: seo.nombre, url: SITE, logo: `${SITE}/apple-touch-icon.png` }, { '@type': 'WebSite', name: seo.nombre, url: SITE, inLanguage: 'es' }] }) : '';
     let cabeza = (sinIndice ? NOINDEX : '') + metaPagina(ruta) + (PRECARGA[info.tipo] ?? '');
     if (info.tipo === 'nf') cabeza = cabeza.replace(/<link rel="canonical"[^>]*>/, '');
     add(salida, envolver(info.tipo, cabeza, main, anal(ruta), datos, ruta));
