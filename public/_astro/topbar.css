@@ -111,12 +111,15 @@ iframe.goog-te-banner-frame,.goog-te-banner-frame,#goog-gt-tt,.goog-te-balloon-f
 .site-header[data-astro-cid-nen7h5rs]::before {
   content: ""; position: absolute; inset: 0 0 -1px; z-index: -1; pointer-events: none;
   background-color: #061a2d;
-  -webkit-backdrop-filter: blur(18px) saturate(170%);
-          backdrop-filter: blur(18px) saturate(170%);
   transition: background-color .2s;
 }
-/* Arriba del todo no hay nada detrás: azul noche; al bajar, vidrio */
-.site-header[data-astro-cid-nen7h5rs].is-scrolled::before { background-color: rgba(6, 26, 45, .72); }
+/* Arriba del todo no hay nada detrás: azul noche opaco, sin desenfoque (no cuesta nada).
+   Al bajar, vidrio ligero: blur pequeño y sin saturate para no dar tirones en el scroll. */
+.site-header[data-astro-cid-nen7h5rs].is-scrolled::before {
+  background-color: rgba(6, 26, 45, .8);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+}
 .site-header[data-astro-cid-nen7h5rs].is-open::before { background-color: #061a2d; }
 .nav[data-astro-cid-nen7h5rs] a[data-astro-cid-nen7h5rs]:not(.btn):not([aria-current=page]) { color: rgba(255, 255, 255, .88); }
 
