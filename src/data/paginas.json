@@ -167,6 +167,12 @@
       "titulo": "Primer embarque · Vida a Bordo | Rumbo Mercante",
       "descripcion": "Todo lo que necesitas saber antes y durante tus prácticas a bordo.",
       "noindex": false
+    },
+    {
+      "ruta": "/vamos-a-la-mar/",
+      "titulo": "Vamos a la mar · Dónde postularse para trabajar a bordo | Rumbo Mercante",
+      "descripcion": "Páginas oficiales de reclutamiento de navieras, gestoras de buques y cruceros, y cómo preparar tus documentos para postular a bordo.",
+      "noindex": true
     }
   ]
 }
