@@ -1,23 +1,28 @@
 ---
-titulo: "Nace Rumbo Mercante: el siguiente paso de Ingmaritima"
-descripcion: Presentamos Rumbo Mercante, un espacio con recursos, herramientas y
-  conocimiento operativo para la gente de mar. Qué encontrarás y qué viene a
-  continuación.
+titulo: 'Nace Rumbo Mercante: el siguiente paso de Ingmaritima'
+descripcion: Presentamos Rumbo Mercante, un espacio con recursos, herramientas y conocimiento operativo para la gente de mar. Qué encontrarás y qué viene a continuación.
 fecha: 2026-10-29
 publicado: true
 categoria: actualidad/novedades
 tipo: Noticia
 imagen: /img/articulos/1000734740.webp
+imagenAlt: ''
 minutos: 1
 etiquetas:
   - novedades
   - rumbo mercante
 imprimible: false
+descargaUrl: ''
+descargaTexto: ''
 seo:
+  titulo: ''
+  descripcion: ''
   imagen: /og/articulos/nace-rumbo-mercante.jpg
+  palabraClave: ''
   noindex: false
 ---
-Hoy arranca **Rumbo Mercante**, un espacio pensado para la gente de mar: estudiantes, cadetes, pasantes y oficiales que buscan información práctica y herramientas listas para usar.
+
+Hoy arranca **Rumbo Mercante**, un espacio pensado para la gente de mar: estudiantes, cadetes, pasantes, oficiales y gente de mar en general que buscan información práctica y herramientas listas para usar.
 
 Hace años creé [Ingmaritima](https://ingmaritima.blogspot.com) para compartir lo que iba aprendiendo. Ese blog sigue vivo, pero la experiencia acumulada desde entonces pedía un espacio nuevo, más ordenado y más útil.
 
@@ -25,10 +30,10 @@ Hace años creé [Ingmaritima](https://ingmaritima.blogspot.com) para compartir 
 
 El contenido está organizado en cuatro secciones:
 
-- **[Recursos](/recursos/):** plantillas, checklists, glosarios de inglés técnico y herramientas interactivas.
-- **[Guías y Operaciones](/guias/):** explicaciones claras de los sistemas y procedimientos de a bordo.
-- **[Vida a Bordo y Desarrollo Profesional](/vida-a-bordo/):** el lado humano del oficio y la carrera.
-- **[Actualidad Marítima](/actualidad/):** normativa y novedades del sector explicadas en la práctica.
+- [**Recursos**](/recursos/)**:** plantillas, checklists, glosarios de inglés técnico y herramientas interactivas.
+- [**Guías y Operaciones**](/guias/)**:** explicaciones claras de los sistemas y procedimientos de a bordo.
+- [**Vida a Bordo y Desarrollo Profesional**](/vida-a-bordo/)**:** el lado humano del oficio y la carrera.
+- [**Actualidad Marítima**](/actualidad/)**:** normativa y novedades del sector explicadas en la práctica.
 
 ## Para empezar
 
