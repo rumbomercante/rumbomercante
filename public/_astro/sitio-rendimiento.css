@@ -1,0 +1,24 @@
+/* Todas las páginas (menos la portada, que tiene home-rendimiento.css): mismo aspecto sin vidrio esmerilado.
+   El desenfoque de fondo (backdrop-filter) se recalculaba en cada fotograma al hacer scroll.
+   Para volver atrás basta con quitar el <link> de esta hoja en las plantillas. */
+
+/* Tarjetas claras: blanco translúcido algo más opaco en lugar de vidrio */
+#contenido .sub,#contenido .card,#contenido .other,#contenido .empty,
+#contenido .form,#contenido .box,#contenido .steps li,#contenido .rule,#contenido .cta-row,
+#contenido .toc,#contenido .author-box,#contenido .related .card,
+.post-std,.blog-side .widget{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:linear-gradient(150deg,rgba(255,255,255,.9),rgba(255,255,255,.76))!important}
+#contenido .subnav ul{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:linear-gradient(150deg,rgba(255,255,255,.93),rgba(255,255,255,.82))!important}
+/* El cuerpo de los artículos (el bloque más grande de la web) */
+#contenido .article-body{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:linear-gradient(150deg,rgba(255,255,255,.95),rgba(255,255,255,.88))!important}
+
+/* Tarjetas oscuras: conservan su azul, solo pierden el desenfoque */
+#contenido .tool,#contenido .side-card,#contenido .refcard,#contenido .results,
+.blog-side .ad-free,#contenido .article-aside .ad-free,
+.profile[data-astro-cid-w6fzp2su],.story[data-astro-cid-w6fzp2su],.cta-row[data-astro-cid-w6fzp2su],
+.story[data-astro-cid-w6fzp2su] blockquote,.value[data-astro-cid-w6fzp2su],
+.dm-pane{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+
+/* Nosotros: la cita y las tarjetas oscuras se veían grisáceas sin el desenfoque */
+.story[data-astro-cid-w6fzp2su] blockquote,.value[data-astro-cid-w6fzp2su]{background:linear-gradient(160deg,rgba(18,61,107,.94),rgba(6,26,45,.96))!important}
+/* Resto de tarjetas oscuras (herramientas, contacto, calculadoras): mismo azul sólido */
+#contenido .tool,#contenido .side-card,#contenido .refcard,#contenido .results{background:linear-gradient(160deg,rgba(18,61,107,.94),rgba(6,26,45,.96))!important}
