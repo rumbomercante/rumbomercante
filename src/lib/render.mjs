@@ -178,7 +178,11 @@ const envolver = (tipo, meta, main, analytics, extra = '', ruta = '') => {
   const pre = fill(s.pre, { SITE }).replace(/<ul id="nav-list"[\s\S]*?<\/ul>/, () => navHtml(ruta));
   const post = fill(s.post, { SITE, ANALYTICS: analytics }).replace(/<footer[\s\S]*?<\/footer>/, () => pieHtml());
   const cabeza = meta.replace('<link rel="icon" type="image/svg+xml" href="/favicon.svg">', '$&<link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest">');
-  const out = s.doc + verificacion() + cabeza + fill(s.tail + cssApariencia() + extra, { SITE }) + '</head>' + pre + ponerSrcset(main) + post;
+  // Hojas de estilo propias de una página (marcadas con data-head en su plantilla): van a <head>,
+  // así el navegador las tiene antes de pintar y la página no se dibuja a trozos.
+  const propias = [];
+  main = main.replace(/<link rel="stylesheet" data-head [^>]*>/g, (m) => { propias.push(m.replace(' data-head', '')); return ''; });
+  const out = s.doc + verificacion() + cabeza + fill(s.tail + cssApariencia() + extra, { SITE }) + propias.join('') + '</head>' + pre + ponerSrcset(main) + post;
   return out;
 };
 const reemplazaValor = (m, viejo, nuevo) => (viejo === nuevo ? m : m.split(`"${esc(viejo)}"`).join(`"${esc(nuevo)}"`).split(`>${esc(viejo)}<`).join(`>${esc(nuevo)}<`));

@@ -77,7 +77,6 @@ iframe.goog-te-banner-frame,.goog-te-banner-frame,#goog-gt-tt,.goog-te-balloon-f
 .header-inner > .lang-switch .lang-btn[aria-pressed="true"] {
   opacity: 1; color: transparent;
   background: linear-gradient(150deg, rgba(255, 255, 255, .24), rgba(255, 255, 255, .08));
-  -webkit-backdrop-filter: blur(12px) saturate(170%); backdrop-filter: blur(12px) saturate(170%);
   border-color: rgba(255, 255, 255, .38);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .45), inset 0 -1px 0 rgba(0, 0, 0, .18), 0 6px 16px -6px rgba(0, 0, 0, .6);
 }
@@ -113,12 +112,10 @@ iframe.goog-te-banner-frame,.goog-te-banner-frame,#goog-gt-tt,.goog-te-balloon-f
   background-color: #061a2d;
   transition: background-color .2s;
 }
-/* Arriba del todo no hay nada detrás: azul noche opaco, sin desenfoque (no cuesta nada).
-   Al bajar, vidrio ligero: blur pequeño y sin saturate para no dar tirones en el scroll. */
+/* Menú fijo sin vidrio: el desenfoque se recalculaba en cada fotograma del scroll.
+   Arriba, azul noche opaco; al bajar, azul noche al 95 % (casi igual a la vista, sin coste). */
 .site-header[data-astro-cid-nen7h5rs].is-scrolled::before {
-  background-color: rgba(6, 26, 45, .8);
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
+  background-color: rgba(6, 26, 45, .95);
 }
 .site-header[data-astro-cid-nen7h5rs].is-open::before { background-color: #061a2d; }
 .nav[data-astro-cid-nen7h5rs] a[data-astro-cid-nen7h5rs]:not(.btn):not([aria-current=page]) { color: rgba(255, 255, 255, .88); }
