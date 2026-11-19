@@ -223,3 +223,13 @@
 @media (max-width: 1024px) {
   .blog-side .side-ad { display: none; }
 }
+
+/* ---------- Paginación del blog (10 por página) ---------- */
+.blog-pager{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:.5rem;margin:2.2rem 0 .5rem}
+.blog-pager[hidden]{display:none}
+.blog-pager .pg{min-width:44px;height:44px;padding:0 .9rem;border-radius:999px;border:1px solid #06192d1f;background:#ffffffe6;color:var(--ink,#061a2d);font:600 .95rem/1 var(--font-body,inherit);cursor:pointer;box-shadow:0 6px 16px -10px #06192d59;transition:background .2s,color .2s,border-color .2s,transform .2s}
+.blog-pager .pg:hover:not(:disabled):not([aria-current]){border-color:var(--brass,#f0c27a);transform:translateY(-1px)}
+.blog-pager .pg:focus-visible{outline:2px solid var(--brass,#f0c27a);outline-offset:2px}
+.blog-pager .pg[aria-current="page"]{background:var(--navy-900,#061a2d);color:#fff;border-color:transparent;cursor:default}
+.blog-pager .pg-flecha{font-size:1.1rem}
+.blog-pager .pg:disabled{opacity:.35;cursor:default;box-shadow:none}
