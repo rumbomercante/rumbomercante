@@ -1,0 +1,29 @@
+/* Portada: rendimiento. Mismo aspecto sin los efectos que el navegador recalcula en cada fotograma.
+   Se carga la última; para volver atrás basta con quitar su <link> de la portada. */
+
+/* 1) Carrusel de anunciantes: tarjetas en movimiento SIN vidrio (era lo más costoso) */
+.page-dm .ad-card-body,.page-dm .ad-card-logo,.page-dm .ad-slide .ad-card-logo,.page-dm .ad-slide .ad-card-body,
+.page-dm .ad-pausa,.page-dm .promo[data-astro-cid-5cg62lrn],
+.page-dm .slots-marquee .slot.slot-logo,.page-dm .slots-marquee .slot.empty{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+.page-dm .ad-slide .ad-card-logo{background:linear-gradient(160deg,rgba(255,255,255,.94),rgba(255,255,255,.82))!important}
+.page-dm .ad-slide .ad-card-body{background:linear-gradient(160deg,rgba(14,50,88,.9),rgba(6,26,45,.94))!important}
+.page-dm .ad-pausa{background:rgba(6,26,45,.92)}
+.page-dm .promo[data-astro-cid-5cg62lrn]{background:linear-gradient(150deg,rgba(6,26,45,.94),rgba(6,26,45,.86))!important}
+.page-dm .slots-marquee .slot.slot-logo,.page-dm .slots-marquee .slot.empty{background:linear-gradient(150deg,rgba(255,255,255,.92),rgba(255,255,255,.78))!important}
+.page-dm .ad-track{will-change:transform}
+
+/* 2) Manchas de color del fondo: sin desenfoque ni deriva animada (los degradados ya son suaves) */
+.page-dm .dm-band:has(.dm-features)::before,.page-dm .dm-band:has(.dm-startlist)::before,
+.page-dm .dm-band:has(.dm-track)::before,.page-dm .dm-band:has(.dm-tools)::before,
+.page-dm .ads[data-astro-cid-5cg62lrn]::before,.page-dm .ad-marquee::before{filter:none!important;animation:none!important;transform:none!important;opacity:.75}
+
+/* 3) Tarjetas: blanco translúcido en lugar de vidrio esmerilado */
+.page-dm .dm-feature,.page-dm .dm-post,.page-dm .dm-tool{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:linear-gradient(150deg,rgba(255,255,255,.9),rgba(255,255,255,.74))!important}
+.page-dm .dm-band:has(.dm-startlist) .dm-start{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:linear-gradient(150deg,rgba(255,255,255,.12),rgba(255,255,255,.05))!important}
+.page-dm .dm-pane{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+
+/* 4) Cabecera: la foto aparece directamente, sin el zoom de 24 s */
+.page-dm .dm .hero-img img{animation:none!important}
+
+/* 5) Secciones de abajo: el navegador no las dibuja hasta acercarse */
+.page-dm .ads[data-astro-cid-5cg62lrn]{content-visibility:auto;contain-intrinsic-size:auto 900px}
